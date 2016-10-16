@@ -14,12 +14,15 @@ Ext.application({
         var source2;
         var source3;
         var source4;
+        var source5;
         var layer1;
         var layer2;
         var layer3;
         var layer4;
+        var layer5;
         var olMap;
         var treeStore;
+        var strWMSVilca;
 
 
         /*source1 = new ol.source.TileWMS({
@@ -65,8 +68,10 @@ Ext.application({
             }
         );*/
 
+        strWMSVilca = 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/Vilcabamba/wms?';
+
         source2 = new ol.source.TileWMS({
-            url: 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/vilcabamba/wms?',
+            url: strWMSVilca,
             params: {'LAYERS': 'VILCABAMBA', 'TILED': true}
         });
         layer2 = new ol.layer.Tile({
@@ -77,7 +82,7 @@ Ext.application({
         });
 
         source3 = new ol.source.TileWMS({
-            url: 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/vilcabamba/wms?',
+            url: strWMSVilca,
             params: {'LAYERS': 'RIOS_VILCABAMBA', 'TILED': true}
         });
         layer3 = new ol.layer.Tile({
@@ -88,7 +93,7 @@ Ext.application({
         });
 
         source4 = new ol.source.TileWMS({
-            url: 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/vilcabamba/wms?',
+            url: strWMSVilca,
             params: {'LAYERS': 'CCPP_VILCABAMBA', 'TILED': true}
         });
         layer4 = new ol.layer.Tile({
@@ -98,8 +103,19 @@ Ext.application({
             visible: true
         });
 
+        source5 = new ol.source.TileWMS({
+            url: strWMSVilca,
+            params: {'LAYERS': 'CURVAS_VILCABAMBA', 'TILED': true}
+        });
+        layer5 = new ol.layer.Tile({
+            source: source5,
+            name: 'Curvas de Nivel',
+            description: 'Curvas de Nivel',
+            visible: false
+        });
+
         olMap = new ol.Map({
-            layers: [layer1, layer2, layer3, layer4],
+            layers: [layer1, layer5, layer2, layer3, layer4],
             view: new ol.View({
                 center: [-8138700, -1475000],
                 zoom: 10
