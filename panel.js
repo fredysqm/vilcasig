@@ -12,50 +12,39 @@ Ext.application({
     launch: function() {
         var source1;
         var source2;
-        var source3;
         var layer1;
         var layer2;
-        var layer3;
-        var group;
         var olMap;
         var treeStore;
 
-        source1 = new ol.source.Stamen({layer: 'watercolor'});
-        layer1 = new ol.layer.Tile({
-            source: source1,
-            name: 'Stamen Watercolor'
-        });
 
-        source2 = new ol.source.Stamen({layer: 'terrain-labels'});
-        layer2 = new ol.layer.Tile({
-            source: source2,
-            name: 'Stamen Terrain Labels'
-        });
-
-        source3 = new ol.source.TileWMS({
+        source1 = new ol.source.TileWMS({
             url: 'http://ows.terrestris.de/osm-gray/service',
             params: {'LAYERS': 'OSM-WMS', 'TILED': true}
         });
-        layer3 = new ol.layer.Tile({
-            source: source3,
-            name: 'terrestris OSM WMS',
-            description: 'This is a layer description that will be visible ' +
-                'as a tooltip.',
-            visible: false
-        });
-
-        group = new ol.layer.Group({
-            name: 'Some Stamen Layers',
-            layers: [layer1, layer2],
+        layer1 = new ol.layer.Tile({
+            source: source1,
+            name: 'Base',
+            description: 'Capa base',
             visible: true
         });
 
+        source2 = new ol.source.TileWMS({
+            url: 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/vilcabamba/wms?',
+            params: {'LAYERS': 'VILCABAMBA', 'TILED': true}
+        });
+        layer2 = new ol.layer.Tile({
+            source: source2,
+            name: 'Limite distrital',
+            description: 'Limite distrital',
+            visible: true
+        });
 
         olMap = new ol.Map({
-            layers: [group, layer3],
+            layers: [layer1, layer2,],
             view: new ol.View({
-                center: [0, 0],
-                zoom: 2
+                center: [-8138700, -1475000],
+                zoom: 10
             })
         });
 
@@ -75,7 +64,7 @@ Ext.application({
         });
 
         treePanel = Ext.create('Ext.tree.Panel', {
-            title: 'Tree Example',
+            title: 'SIG Vilcabamba',
             viewConfig: {
                 plugins: {ptype: 'treeviewdragdrop'}
             },
@@ -87,7 +76,7 @@ Ext.application({
 
         var description = Ext.create('Ext.panel.Panel', {
             contentEl: 'description',
-            title: 'Description',
+            title: 'Detalle',
             height: 200,
             border: false,
             bodyPadding: 5
