@@ -12,13 +12,17 @@ Ext.application({
     launch: function() {
         var source1;
         var source2;
+        var source3;
+        var source4;
         var layer1;
         var layer2;
+        var layer3;
+        var layer4;
         var olMap;
         var treeStore;
 
 
-        source1 = new ol.source.TileWMS({
+        /*source1 = new ol.source.TileWMS({
             url: 'http://ows.terrestris.de/osm-gray/service',
             params: {'LAYERS': 'OSM-WMS', 'TILED': true}
         });
@@ -27,7 +31,39 @@ Ext.application({
             name: 'Base',
             description: 'Capa base',
             visible: true
+        });*/
+
+
+        /*source1 = new ol.source.OSM();
+        layer1 = new ol.layer.Tile({
+            source: source1
+        });*/
+
+
+        source1 = new ol.source.TileWMS({
+            url: 'https://ows.terrestris.de/osm/service?"',
+            params: {'LAYERS': 'OSM-WMS', 'TILED': true}
         });
+        layer1 = new ol.layer.Tile({
+            source: source1,
+            name: 'Base',
+            description: 'Capa base',
+            visible: true
+        });
+
+        /*var map = new OpenLayers.Map({allOverlays: true, fallThrough: true});
+
+        var wms = new OpenLayers.Layer.WMS(
+            "OpenStreetMap WMS",
+            "https://ows.terrestris.de/osm/service?",
+            {layers: 'OSM-WMS'},
+            {
+                attribution: '&copy; terrestris GmbH & Co. KG <br>' +
+                    'Data &copy; OpenStreetMap ' +
+                    '<a href="http://www.openstreetmap.org/copyright/en"' +
+                    'target="_blank">contributors<a>'
+            }
+        );*/
 
         source2 = new ol.source.TileWMS({
             url: 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/vilcabamba/wms?',
@@ -40,8 +76,30 @@ Ext.application({
             visible: true
         });
 
+        source3 = new ol.source.TileWMS({
+            url: 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/vilcabamba/wms?',
+            params: {'LAYERS': 'RIOS_VILCABAMBA', 'TILED': true}
+        });
+        layer3 = new ol.layer.Tile({
+            source: source3,
+            name: 'Hidrografia',
+            description: 'Hidrografia',
+            visible: true
+        });
+
+        source4 = new ol.source.TileWMS({
+            url: 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/vilcabamba/wms?',
+            params: {'LAYERS': 'CCPP_VILCABAMBA', 'TILED': true}
+        });
+        layer4 = new ol.layer.Tile({
+            source: source4,
+            name: 'Centros Poblados',
+            description: 'Centros Poblados',
+            visible: true
+        });
+
         olMap = new ol.Map({
-            layers: [layer1, layer2,],
+            layers: [layer1, layer2, layer3, layer4],
             view: new ol.View({
                 center: [-8138700, -1475000],
                 zoom: 10
