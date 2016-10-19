@@ -15,11 +15,13 @@ Ext.application({
         var source3;
         var source4;
         var source5;
+		var source6;
         var layer1;
         var layer2;
         var layer3;
         var layer4;
         var layer5;
+		var layer6;
         var olMap;
         var treeStore;
         var strWMSVilca;
@@ -68,7 +70,7 @@ Ext.application({
             }
         );*/
 
-        strWMSVilca = 'http://sig-vilcabamba.svr64.xyz:9181/geoserver/Vilcabamba/wms?';
+        strWMSVilca = 'http://192.198.1.118:9181/geoserver/Vilcabamba/wms?';
 
         source2 = new ol.source.TileWMS({
             url: strWMSVilca,
@@ -114,18 +116,64 @@ Ext.application({
             visible: false
         });
 
-        olMap = new ol.Map({
-            layers: [layer1, layer5, layer2, layer3, layer4],
-            view: new ol.View({
+        source6 = new ol.source.TileWMS({
+            url: strWMSVilca,
+            params: {'LAYERS': 'Lt_Vilcabamba', 'TILED': true}
+        });
+        layer6 = new ol.layer.Tile({
+            source: source6,
+            name: 'LtVilcabamba',
+            description: 'LtVilcabamba',
+            visible: false
+        });		
+		
+		
+		var zoomslider;
+		var scaleLineControl = new ol.control.ScaleLine();
+		var view = new ol.View({
                 center: [-8138700, -1475000],
                 zoom: 10
-            })
+            });
+        olMap = new ol.Map({
+			controls: ol.control.defaults().extend([
+			  new ol.control.FullScreen()
+			]).extend([
+				scaleLineControl
+			]),
+            layers: [layer1, layer5, layer2, layer3, layer4, layer6],
+            view: view
         });
+        zoomslider = new ol.control.ZoomSlider();
+        olMap.addControl(zoomslider);
 
         mapComponent = Ext.create('GeoExt.component.Map', {
             map: olMap
         });
 
+      olMap.on('singleclick', function(evt) {
+        document.getElementById('info').innerHTML = '';
+        var viewResolution = /** @type {number} */ (view.getResolution());
+        var url = source4.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:32718',
+            {'INFO_FORMAT': 'text/html'});
+		alert(url);
+        if (url) {
+          document.getElementById('info').innerHTML =
+              '<iframe seamless src="' + url + '"></iframe>';
+        }
+      });
+
+      olMap.on('pointermove', function(evt) {
+        if (evt.dragging) {
+          return;
+        }
+        var pixel = olMap.getEventPixel(evt.originalEvent);
+        var hit = olMap.forEachLayerAtPixel(pixel, function() {
+          return true;
+        });
+        olMap.getTargetElement().style.cursor = hit ? 'pointer' : '';
+      });
+		
         mapPanel = Ext.create('Ext.panel.Panel', {
             region: 'center',
             border: false,
@@ -149,7 +197,7 @@ Ext.application({
         });
 
         var description = Ext.create('Ext.panel.Panel', {
-            contentEl: 'description',
+            contentEl: 'info',
             title: 'Detalle',
             height: 200,
             border: false,
