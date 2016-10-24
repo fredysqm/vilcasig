@@ -151,14 +151,15 @@ Ext.application({
         });
 
       olMap.on('singleclick', function(evt) {
-        document.getElementById('description').innerHTML = '';
+        //document.getElementById('description').innerHTML = '';
         var viewResolution = /** @type {number} */ (view.getResolution());
         var url = source4.getGetFeatureInfoUrl(
             evt.coordinate, viewResolution, 'EPSG:3857',
             {'INFO_FORMAT': 'application/json'});
         if (url) {
-          document.getElementById('description').innerHTML =
-              '<iframe seamless src="' + url + '"></iframe>';
+
+          //document.getElementById('description').innerHTML =
+              //'<iframe seamless src="' + url + '"></iframe>';
         }
       });
 
