@@ -125,9 +125,9 @@ Ext.application({
             name: 'LtVilcabamba',
             description: 'LtVilcabamba',
             visible: false
-        });		
-		
-		
+        });
+
+
 		var zoomslider;
 		var scaleLineControl = new ol.control.ScaleLine();
 		var view = new ol.View({
@@ -151,14 +151,13 @@ Ext.application({
         });
 
       olMap.on('singleclick', function(evt) {
-        document.getElementById('info').innerHTML = '';
+        document.getElementById('description').innerHTML = '';
         var viewResolution = /** @type {number} */ (view.getResolution());
         var url = source4.getGetFeatureInfoUrl(
-            evt.coordinate, viewResolution, 'EPSG:32718',
-            {'INFO_FORMAT': 'text/html'});
-		alert(url);
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {'INFO_FORMAT': 'application/json'});
         if (url) {
-          document.getElementById('info').innerHTML =
+          document.getElementById('description').innerHTML =
               '<iframe seamless src="' + url + '"></iframe>';
         }
       });
@@ -173,7 +172,7 @@ Ext.application({
         });
         olMap.getTargetElement().style.cursor = hit ? 'pointer' : '';
       });
-		
+
         mapPanel = Ext.create('Ext.panel.Panel', {
             region: 'center',
             border: false,
@@ -197,7 +196,7 @@ Ext.application({
         });
 
         var description = Ext.create('Ext.panel.Panel', {
-            contentEl: 'info',
+            contentEl: 'description',
             title: 'Detalle',
             height: 200,
             border: false,
