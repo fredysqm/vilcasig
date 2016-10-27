@@ -15,13 +15,13 @@ Ext.application({
         var source3;
         var source4;
         var source5;
-		var source6;
+        var source6;
         var layer1;
         var layer2;
         var layer3;
         var layer4;
         var layer5;
-		var layer6;
+        var layer6;
         var olMap;
         var treeStore;
         var strWMSVilca;
@@ -157,13 +157,15 @@ Ext.application({
             evt.coordinate, viewResolution, 'EPSG:3857',
             {'INFO_FORMAT': 'application/json'});
         if (url) {
-
-          //document.getElementById('description').innerHTML =
-              //'<iframe seamless src="' + url + '"></iframe>';
+          //document.getElementById('description').innerHTML = '<iframe seamless src="' + url + '"></iframe>';
+          //alert(url);
+          $.getJSON(url, function(data) {
+                alert(data);
+            });
         }
       });
 
-      olMap.on('pointermove', function(evt) {
+      /*olMap.on('pointermove', function(evt) {
         if (evt.dragging) {
           return;
         }
@@ -172,7 +174,7 @@ Ext.application({
           return true;
         });
         olMap.getTargetElement().style.cursor = hit ? 'pointer' : '';
-      });
+      });*/
 
         mapPanel = Ext.create('Ext.panel.Panel', {
             region: 'center',
