@@ -16,12 +16,21 @@ Ext.application({
         var source4;
         var source5;
         var source6;
+        var source7;
+        var source8;
+        var source9;
+        var source10;
         var layer1;
         var layer2;
         var layer3;
         var layer4;
         var layer5;
         var layer6;
+        var layer7;
+        var layer8;
+        var layer9;
+        var layer10;
+        var layer11;
         var olMap;
         var treeStore;
         var strWMSVilca;
@@ -70,7 +79,7 @@ Ext.application({
             }
         );*/
 
-        strWMSVilca = 'http://192.198.1.118:9181/geoserver/Vilcabamba/wms?';
+        strWMSVilca = 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi?';
 
         source2 = new ol.source.TileWMS({
             url: strWMSVilca,
@@ -85,7 +94,7 @@ Ext.application({
 
         source3 = new ol.source.TileWMS({
             url: strWMSVilca,
-            params: {'LAYERS': 'RIOS_VILCABAMBA', 'TILED': true}
+            params: {'LAYERS': 'RIOS', 'TILED': true}
         });
         layer3 = new ol.layer.Tile({
             source: source3,
@@ -96,7 +105,7 @@ Ext.application({
 
         source4 = new ol.source.TileWMS({
             url: strWMSVilca,
-            params: {'LAYERS': 'CCPP_VILCABAMBA', 'TILED': true}
+            params: {'LAYERS': 'CCPP', 'TILED': true}
         });
         layer4 = new ol.layer.Tile({
             source: source4,
@@ -107,7 +116,7 @@ Ext.application({
 
         source5 = new ol.source.TileWMS({
             url: strWMSVilca,
-            params: {'LAYERS': 'CURVAS_VILCABAMBA', 'TILED': true}
+            params: {'LAYERS': 'CURVAS', 'TILED': true}
         });
         layer5 = new ol.layer.Tile({
             source: source5,
@@ -128,6 +137,63 @@ Ext.application({
         });
 
 
+        source7 = new ol.source.TileWMS({
+            url: strWMSVilca,
+            params: {'LAYERS': 'DEPARTAMENTO', 'TILED': true}
+        });
+        layer7 = new ol.layer.Tile({
+            source: source7,
+            name: 'DEPARTAMENTO',
+            description: 'DEPARTAMENTO',
+            visible: true
+        });
+
+        source8 = new ol.source.TileWMS({
+            url: strWMSVilca,
+            params: {'LAYERS': 'PROVINCIA', 'TILED': true}
+        });
+        layer8 = new ol.layer.Tile({
+            source: source8,
+            name: 'PROVINCIA',
+            description: 'PROVINCIA',
+            visible: true
+        });
+
+        source9 = new ol.source.TileWMS({
+            url: strWMSVilca,
+            params: {'LAYERS': 'DISTRITO', 'TILED': true}
+        });
+        layer9 = new ol.layer.Tile({
+            source: source9,
+            name: 'DISTRITO',
+            description: 'DISTRITO',
+            visible: true
+        });
+
+        source10 = new ol.source.TileWMS({
+            url: strWMSVilca,
+            params: {'LAYERS': 'PREDIOS_MATRICES', 'TILED': true}
+        });
+        layer10 = new ol.layer.Tile({
+            source: source10,
+            name: 'PREDIOS_MATRICES',
+            description: 'PREDIOS_MATRICES',
+            visible: true
+        });
+
+
+        layer11 = new ol.layer.Tile({
+          visible: true,
+          preload: Infinity,
+          source: new ol.source.BingMaps({
+            key: 'Ah50MLZcGai9LY5lUAqrOLAMWNDLdp4xjdkNLJYACHuQtqvQ7osDRytwJXnkJDH3',
+            imagerySet: 'Aerial',
+            // use maxZoom 19 to see stretched tiles instead of the BingMaps
+            // "no photos at this zoom level" tiles
+            maxZoom: 19
+          })
+        });
+
 		var zoomslider;
 		var scaleLineControl = new ol.control.ScaleLine();
 		var view = new ol.View({
@@ -135,12 +201,13 @@ Ext.application({
                 zoom: 10
             });
         olMap = new ol.Map({
+            loadTilesWhileInteracting: true,
 			controls: ol.control.defaults().extend([
 			  new ol.control.FullScreen()
 			]).extend([
 				scaleLineControl
 			]),
-            layers: [layer1, layer5, layer2, layer3, layer4, layer6],
+            layers: [layer11, layer5, layer2, layer3, layer4, layer6, layer7, layer8, layer9, layer10],
             view: view
         });
         zoomslider = new ol.control.ZoomSlider();
