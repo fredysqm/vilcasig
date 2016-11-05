@@ -79,7 +79,7 @@ Ext.application({
             }
         );*/
 
-        strWMSVilca = 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi?';
+        strWMSVilca = 'http://sig.mdv.net:9183/geoserver/vilcabamba/wms';
 
         source2 = new ol.source.TileWMS({
             url: strWMSVilca,
