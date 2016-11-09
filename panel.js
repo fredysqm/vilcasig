@@ -31,6 +31,7 @@ Ext.application({
         var layer9;
         var layer10;
         var layer11;
+        var layer12;
         var olMap;
         var treeStore;
         var strWMSVilca;
@@ -79,7 +80,7 @@ Ext.application({
             }
         );*/
 
-        strWMSVilca = 'http://sig.mdv.net:9183/geoserver/vilcabamba/wms';
+        strWMSVilca = 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi';
 
         source2 = new ol.source.TileWMS({
             url: strWMSVilca,
@@ -193,6 +194,7 @@ Ext.application({
             maxZoom: 19
           })
         });
+
 
 		var zoomslider;
 		var scaleLineControl = new ol.control.ScaleLine();
