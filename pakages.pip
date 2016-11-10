@@ -1,5 +1,4 @@
 Django
-mysqlclient
+psycopg2
 django_compressor
 djangorestframework
-django-debug-toolbar
