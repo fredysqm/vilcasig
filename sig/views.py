@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+
+class sig_main(TemplateView):
+    template_name = 'sig/main.html'

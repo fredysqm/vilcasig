@@ -11,7 +11,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #3rd
-    'debug_toolbar',
     'compressor',
     'rest_framework',
     #me

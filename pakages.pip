@@ -1,0 +1,5 @@
+Django
+mysqlclient
+django_compressor
+djangorestframework
+django-debug-toolbar
