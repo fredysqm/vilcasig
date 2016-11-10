@@ -1,3 +1,10 @@
+Ext.Loader.setConfig({
+    enabled: true,
+    paths: {
+        'GeoExt': '/static/lib/geoext/src'
+    }
+});
+
 Ext.require([
     'GeoExt.component.Map',
     'GeoExt.data.store.LayersTree'

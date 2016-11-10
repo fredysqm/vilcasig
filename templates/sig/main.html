@@ -8,46 +8,45 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
     <title>SIG Vilcabamba</title>
 
+    {% compress css %}
     <link rel="stylesheet" type="text/css" href="{% static 'lib/ol/ol.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'lib/ext/classic/theme-crisp/resources/theme-crisp-all.css' %}"/>
     <style>
         .map:-moz-full-screen {
-        height: 100%;
+            height: 100%;
         }
         .map:-webkit-full-screen {
-        height: 100%;
+            height: 100%;
         }
         .map:-ms-fullscreen {
-        height: 100%;
+            height: 100%;
         }
         .map:fullscreen {
-        height: 100%;
+            height: 100%;
         }
         .ol-rotate {
-        top: 3em;
+            top: 3em;
         }
     </style>
+    {% endcompress %}
 </head>
 
 <body>
     <div id="map" class="map"></div>
     <div id="info">&nbsp;</div>
     <div id='description'>
-    SIG Vilcabamba <br />
-    DDUR Desarrollo Urbano y Rural
+        SIG Vilcabamba <br />
+        Desarrollo Urbano y Rural
     </div>
 
+    {% compress js %}
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'lib/ol/ol.js' %}"></script>
     <script src="{% static 'lib/ext/ext-all.js' %}"></script>
-    <script>
-        Ext.Loader.setConfig({
-            enabled: true,
-            paths: {
-                'GeoExt': '/static/lib/geoext/src'
-            }
-        });
-    </script>
+    {% endcompress %}
+
+    {% compress js %}
     <script src="{% static 'js/main.js' %}"></script>
+    {% endcompress %}
 </body>
 </html>
