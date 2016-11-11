@@ -1,0 +1,24 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    overflow: hidden;
+    /*padding-top: 70px;*/
+    background-color: #f5f5f5;
+}
+
+.navbar-offset { margin-top: 70px; margin-bottom: 70px; }
+
+.navbar-brand {
+    padding:13.5px 15px 12.5px
+}
+
+.navbar-brand>img {
+    display:inline;
+    margin:0 10px;
+    height:100%
+}
+
+      #map { top: 50px; bottom: 0px; left: 0px; right: 0px; }

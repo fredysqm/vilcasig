@@ -1,47 +1,30 @@
-{% load staticfiles %}{% load compress %}<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <link rel="icon" type="image/png" href="{% static 'img/' %}">
-    <title>SIG Vilcabamba</title>
-
-    <link rel="stylesheet" href="{% static 'lib/ol/ol.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'lib/ext/classic/theme-crisp/resources/theme-crisp-all.css' %}" type="text/css">
-    {% compress css %}
-    <style>
-        .map:-moz-full-screen {
-            height: 100%;
-        }
-        .map:-webkit-full-screen {
-            height: 100%;
-        }
-        .map:-ms-fullscreen {
-            height: 100%;
-        }
-        .map:fullscreen {
-            height: 100%;
-        }
-        .ol-rotate {
-            top: 3em;
-        }
-    </style>
-    {% endcompress %}
-</head>
-
-<body>
-    <div id="map" class="map"></div>
-    <div id='description'>
-        SIG Vilcabamba <br />
-        Desarrollo Urbano y Rural
+{% extends 'base.html' %}{% load staticfiles %}
+{% block title %}{% endblock %}
+{% block menu %}
+<ul class="nav navbar-nav">
+    <li class="active"><a href="{% url 'sig_main_url' %}">xxxxx</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <div id="map" class="map"></div>
     </div>
-    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'lib/ol/ol.js' %}"></script>
-    <script type="text/javascript" src="{% static 'lib/ext/ext-all.js' %}"></script>
-    {% compress js %}
-    <script src="{% static 'js/main.js' %}"></script>
-    {% endcompress %}
-</body>
-</html>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [0, 0],
+            zoom: 2
+        })
+    });
+</script>
+{% endblock %}
