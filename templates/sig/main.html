@@ -20,9 +20,14 @@
 
             <div class="collapse navbar-collapse" id="bs-navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mapas Base <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btn-source-bingmaps">Open Street Maps</a></li>
+                            <li><a href="#" id="btn-source-bingmapsaerial">Bing Maps Aerial</a></li>
+                            <li><a href="#" id="btn-source-xyz">Esri</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -34,6 +39,21 @@
 
 {% block js %}
 <script type="text/javascript">
+
+    var src_base_openstretmaps = new ol.source.OSM();
+    var src_base_bingmapsaerial = new ol.source.BingMaps({
+                    key: 'Ah50MLZcGai9LY5lUAqrOLAMWNDLdp4xjdkNLJYACHuQtqvQ7osDRytwJXnkJDH3',
+                    imagerySet: 'Aerial',
+                    maxZoom: 30
+                });
+    var src_base_xyz = new ol.source.XYZ({
+              url: 'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+                  'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+            });
+
+    var baseLayer = new ol.layer.Tile();
+    baseLayer.setSource(src_base_openstretmaps);
+
 
     var map = new ol.Map({
         target: 'map',
@@ -53,9 +73,7 @@
         ]),
 
         layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
-            })
+            baseLayer,
         ],
 
         view: new ol.View({
@@ -65,6 +83,20 @@
     });
 
     map.addControl(new ol.control.ZoomSlider());
+
+
+    /* events */
+    $('#btn-source-bingmaps').click(function() {
+        baseLayer.setSource(src_base_openstretmaps);
+    });
+
+    $('#btn-source-bingmapsaerial').click(function() {
+        baseLayer.setSource(src_base_bingmapsaerial);
+    });
+
+    $('#btn-source-xyz').click(function() {
+        baseLayer.setSource(src_base_xyz);
+    });
 
 </script>
 {% endblock %}
