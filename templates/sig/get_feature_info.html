@@ -38,8 +38,8 @@
       var wmsSource = new ol.source.TileWMS({
         url: 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi',
         params: {'LAYERS': 'CCPP'},
-        //serverType: 'geoserver',
-        //crossOrigin: 'anonymous'
+        serverType: 'geoserver',
+        crossOrigin: 'anonymous'
       });
 
       var wmsLayer = new ol.layer.Tile({
@@ -64,8 +64,9 @@
             evt.coordinate, viewResolution, 'EPSG:3857',
             {'INFO_FORMAT': 'text/html'});
         if (url) {
-          document.getElementById('info').innerHTML =
-              '<iframe seamless src="' + url + '"></iframe>';
+          $.get(url);
+           alert($.get(url));
+          document.getElementById('info').innerHTML = '<iframe seamless src="' + url + '"></iframe>';
         }
       });
 
