@@ -1,0 +1,83 @@
+{% extends 'base.html' %}{% load staticfiles %}
+
+{% block title %}SIG Vilcabamba{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'sig_main_url' %}">
+                    <img src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mapas Base <span class="caret"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="navbar-offset"></div>
+<div id="info">&nbsp;</div>
+<div id="map"> </div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+      var wmsSource = new ol.source.TileWMS({
+        url: 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi',
+        params: {'LAYERS': 'CCPP'},
+        //serverType: 'geoserver',
+        //crossOrigin: 'anonymous'
+      });
+
+      var wmsLayer = new ol.layer.Tile({
+        source: wmsSource
+      });
+
+      var view = new ol.View({
+            center: [-8138700, -1475000],
+            zoom: 11,
+      });
+
+      var map = new ol.Map({
+        layers: [wmsLayer],
+        target: 'map',
+        view: view
+      });
+
+      map.on('singleclick', function(evt) {
+        document.getElementById('info').innerHTML = '';
+        var viewResolution = /** @type {number} */ (view.getResolution());
+        var url = wmsSource.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {'INFO_FORMAT': 'text/html'});
+        if (url) {
+          document.getElementById('info').innerHTML =
+              '<iframe seamless src="' + url + '"></iframe>';
+        }
+      });
+
+      map.on('pointermove', function(evt) {
+        if (evt.dragging) {
+          return;
+        }
+        var pixel = map.getEventPixel(evt.originalEvent);
+        var hit = map.forEachLayerAtPixel(pixel, function() {
+          return true;
+        });
+        map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+      });
+</script>
+{% endblock %}
