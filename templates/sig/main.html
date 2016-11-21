@@ -72,6 +72,18 @@
             title: 'Capas Disponibles:',
             layers: [
 
+
+                new ol.layer.Tile({
+                    title: 'Vilcabamba',
+                    name: 'Vilcabamba',
+                    description: 'Vilcabamba_',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'Dist_Vilcabamba', 'TILED': true }
+                    }),
+                }),
+
                 new ol.layer.Tile({
                     title: 'Distritos',
                     name: 'Distrito',
