@@ -1,0 +1,248 @@
+{% extends 'base.html' %}{% load staticfiles %}
+
+{% block title %}SIG Vilcabamba{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'sig_main_url' %}">
+                    <img src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mapas Base <span class="caret"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="navbar-offset"></div>
+<div id="map"> </div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+    var strWMSVilca = 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi';
+    var wms_source_ccpp = new ol.source.ImageWMS({
+        url: strWMSVilca,
+        params: { 'LAYERS': 'CCPP', 'TILED': true },
+        crossOrigin: 'anonymous',
+        singleTile: true,
+        tileSize: 768,
+    });
+
+    var sig_layers = [
+        new ol.layer.Group({
+            'title': 'Mapas base:',
+            layers: [
+                new ol.layer.Tile({
+                    title: 'Esri XYZ',
+                    type: 'base',
+                    visible: false,
+                    source: new ol.source.XYZ({
+                      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+                          'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                    }),
+                }),
+                new ol.layer.Tile({
+                    title: 'OSM',
+                    type: 'base',
+                    visible: false,
+                    source: new ol.source.OSM(),
+                }),
+                new ol.layer.Tile({
+                    title: 'BingMaps Aerial',
+                    type: 'base',
+                    visible: true,
+                    source: new ol.source.BingMaps({
+                        key: 'Ah50MLZcGai9LY5lUAqrOLAMWNDLdp4xjdkNLJYACHuQtqvQ7osDRytwJXnkJDH3',
+                        imagerySet: 'Aerial',
+                        maxZoom: 30
+                    }),
+                }),
+            ]
+        }),
+        new ol.layer.Group({
+            title: 'Capas Disponibles:',
+            layers: [
+
+
+                new ol.layer.Tile({
+                    title: 'Vilcabamba',
+                    name: 'Vilcabamba',
+                    description: 'Vilcabamba_',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'Dist_Vilcabamba', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Distritos',
+                    name: 'Distrito',
+                    description: 'Distrito_',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'DISTRITO', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Provincias',
+                    name: 'Provincia',
+                    description: 'Provincia_',
+                    visible: true,
+                        source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'PROVINCIA', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Departamentos',
+                    description: 'Departamento_',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'DEPARTAMENTO', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Curvas de Nivel',
+                    name: 'Curvas de Nivel',
+                    description: 'Curvas de Nivel_',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'CURVAS_NIVEL', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Rios',
+                    name: 'Rios',
+                    description: 'Rios_',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'RIOS', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Rios Principales',
+                    name: 'Rios Principales',
+                    description: 'Rios Principales_',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'RIOS_POLI', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Image({
+                    title: 'Centros Poblados',
+                    name: 'Centros Poblados',
+                    description: 'Centros Poblados_',
+                    visible: true,
+                    singleTile: true,
+                    gutter: 256,
+                    source: wms_source_ccpp,
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Predios Matrices',
+                    name: 'Predios Matrices',
+                    description: 'Predios Matrices_',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'PREDIOS_MATRICES', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        })
+    ];
+
+
+    var view = new ol.View({
+            center: [-8138700, -1475000],
+            zoom: 11,
+        });
+
+    var map = new ol.Map({
+        target: 'map',
+
+        controls: ol.control.defaults({
+            attributionOptions: ({
+                collapsible: true
+            })
+        }).extend([
+            new ol.control.ScaleLine()
+        ]).extend([
+            new ol.control.OverviewMap({
+                collapsed: false,
+            })
+        ]).extend([
+            new ol.control.FullScreen()
+        ]),
+
+        layers: sig_layers,
+
+        view: view,
+    });
+
+    map.addControl(new ol.control.ZoomSlider());
+
+    var layerSwitcher = new ol.control.LayerSwitcher({
+        tipLabel: 'Leyenda'
+    });
+
+    map.addControl(layerSwitcher);
+    layerSwitcher.showPanel();
+
+
+
+    map.on('singleclick', function(evt) {
+        //document.getElementById('info').innerHTML = '';
+        var viewResolution = /** @type {number} */ (view.getResolution());
+        var url = wms_source_ccpp.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {'INFO_FORMAT': 'text/html'});
+        if (url) {
+            console.log(url);
+        }
+    });
+
+    // map.on('pointermove', function(evt) {
+    //     if (evt.dragging) {
+    //         return;
+    //     }
+    //     var pixel = map.getEventPixel(evt.originalEvent);
+    //     var hit = map.forEachLayerAtPixel(pixel, function() {
+    //         return true;
+    //     });
+    //     map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    // });
+    </script>
+{% endblock %}
