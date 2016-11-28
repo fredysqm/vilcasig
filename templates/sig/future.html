@@ -35,16 +35,31 @@
 <div id="map"> </div>
 {% endblock %}
 
+{% block modals %}
+<div id="cmd_modal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body" id="box_modal">
+                <p>One fine body…</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 {% block js %}
 <script type="text/javascript">
 
     var strWMSVilca = 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi';
-    var wms_source_ccpp = new ol.source.ImageWMS({
-        url: strWMSVilca,
-        params: { 'LAYERS': 'CCPP', 'TILED': true },
+    var wms_source_ccpp = new ol.source.TileWMS({
+        url: 'http://sig.mdv.net:9180/geoserver/vilcabamba/wms?service=WMS',
+        params: { 'LAYERS': 'CCPP', 'TILED': true  },
+        serverType: 'geoserver',
         crossOrigin: 'anonymous',
-        singleTile: true,
-        tileSize: 768,
     });
 
     var sig_layers = [
@@ -159,13 +174,11 @@
                     }),
                 }),
 
-                new ol.layer.Image({
+                new ol.layer.Tile({
                     title: 'Centros Poblados',
                     name: 'Centros Poblados',
                     description: 'Centros Poblados_',
                     visible: true,
-                    singleTile: true,
-                    gutter: 256,
                     source: wms_source_ccpp,
                 }),
 
@@ -228,9 +241,13 @@
         var viewResolution = /** @type {number} */ (view.getResolution());
         var url = wms_source_ccpp.getGetFeatureInfoUrl(
             evt.coordinate, viewResolution, 'EPSG:3857',
-            {'INFO_FORMAT': 'text/html'});
+            {'INFO_FORMAT': 'text/javascript'});
         if (url) {
             console.log(url);
+            $.getJSON(url);
+            document.getElementById('box_modal').innerHTML =
+              '<iframe seamless src="' + url + '"></iframe>';
+            $('#cmd_modal').modal('show');
         }
     });
 
