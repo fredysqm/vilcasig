@@ -58,8 +58,8 @@
     var wms_source_ccpp = new ol.source.TileWMS({
         url: 'http://sig.mdv.net:9180/geoserver/vilcabamba/wms?service=WMS',
         params: { 'LAYERS': 'CCPP', 'TILED': true  },
-        serverType: 'geoserver',
-        crossOrigin: 'anonymous',
+        //serverType: 'geoserver',
+        //crossOrigin: 'anonymous',
     });
 
     var sig_layers = [
@@ -241,7 +241,7 @@
         var viewResolution = /** @type {number} */ (view.getResolution());
         var url = wms_source_ccpp.getGetFeatureInfoUrl(
             evt.coordinate, viewResolution, 'EPSG:3857',
-            {'INFO_FORMAT': 'text/javascript'});
+            {'INFO_FORMAT': 'application/json'});
         if (url) {
             console.log(url);
             $.getJSON(url);

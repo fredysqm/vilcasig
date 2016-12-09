@@ -1,7 +1,5 @@
 from django.conf.urls import url
-
 from sig.views import *
-
 
 
 urlpatterns = [
