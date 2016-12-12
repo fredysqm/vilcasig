@@ -2,8 +2,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-ROOT_URLCONF = 'vilcasig.urls'
-WSGI_APPLICATION = 'vilcasig.wsgi.application'
+ROOT_URLCONF = 'main.urls'
+WSGI_APPLICATION = 'main.wsgi.application'
 
 LANGUAGE_CODE = 'es-PE'
 USE_I18N = True
