@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     'sig',
     'ubigeo',
     'social',
+    'item',
 )
 
 MIDDLEWARE_CLASSES = (

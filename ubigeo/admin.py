@@ -3,7 +3,8 @@ from ubigeo.models import Departamento, Provincia, Distrito, CentroPoblado, Peri
 
 
 class DepartamentoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre',)
+    list_display = ('codigo', 'nombre', 'creado', 'modificado')
+    list_display_links = ('codigo', 'nombre')
     search_fields = ('codigo', 'nombre',)
     ordering = ('codigo', )
     list_per_page = 25
@@ -19,7 +20,8 @@ class DepartamentoAdmin(admin.ModelAdmin):
 
 
 class ProvinciaAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'departamento')
+    list_display = ('codigo', 'nombre', 'departamento', 'creado', 'modificado')
+    list_display_links = ('codigo', 'nombre')
     list_select_related = ('departamento', )
     raw_id_fields = ('departamento',)
     search_fields = ('codigo', 'nombre', )
@@ -37,7 +39,8 @@ class ProvinciaAdmin(admin.ModelAdmin):
     )
 
 class DistritoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'provincia')
+    list_display = ('codigo', 'nombre', 'provincia', 'creado', 'modificado')
+    list_display_links = ('codigo', 'nombre')
     list_select_related = ('provincia', )
     raw_id_fields = ('provincia',)
     search_fields = ('codigo', 'nombre',)
@@ -55,7 +58,8 @@ class DistritoAdmin(admin.ModelAdmin):
 
 
 class CentroPobladoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'distrito')
+    list_display = ('codigo', 'nombre', 'distrito', 'creado', 'modificado')
+    list_display_links = ('codigo', 'nombre')
     list_select_related = ('distrito', )
     raw_id_fields = ('distrito',)
     search_fields = ('codigo', 'nombre',)
@@ -72,8 +76,9 @@ class CentroPobladoAdmin(admin.ModelAdmin):
     )
 
 
+
 class PerimetroAdmin(admin.ModelAdmin):
-    list_display = ('centro_poblado',)
+    list_display = ('centro_poblado', 'creado', 'modificado')
     list_select_related = ('centro_poblado', )
     search_fields = ('centro_poblado',)
     ordering = ('centro_poblado__nombre', )

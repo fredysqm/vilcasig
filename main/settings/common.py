@@ -8,6 +8,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 LANGUAGE_CODE = 'es-PE'
 USE_I18N = True
 USE_L10N = False
+TIME_ZONE = 'America/Lima'
 
 DATETIME_FORMAT = 'd/m/Y H:i'
 
