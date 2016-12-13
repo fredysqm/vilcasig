@@ -16,6 +16,8 @@ INSTALLED_APPS = (
     'rest_framework',
     #me
     'sig',
+    'ubigeo',
+    'social',
     'debug_toolbar',
 )
 
