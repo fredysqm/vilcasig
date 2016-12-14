@@ -1,9 +1,9 @@
 from django.contrib import admin
-from item.models import Oficio, CentroTrabajo
+from item.models import TipoOficio, TipoCentroTrabajo
 
 
 
-class OficioAdmin(admin.ModelAdmin):
+class TipoOficioAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'creado', 'modificado')
     list_display_links = ('id', 'nombre')
     search_fields = ('id', 'nombre')
@@ -17,7 +17,7 @@ class OficioAdmin(admin.ModelAdmin):
 
 
 
-class CentroTrabajoAdmin(admin.ModelAdmin):
+class TipoCentroTrabajoAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'creado', 'modificado')
     list_display_links = ('id', 'nombre')
     search_fields = ('id', 'nombre')
@@ -31,5 +31,5 @@ class CentroTrabajoAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Oficio, OficioAdmin)
-admin.site.register(CentroTrabajo, CentroTrabajoAdmin)
+admin.site.register(TipoOficio, TipoOficioAdmin)
+admin.site.register(TipoCentroTrabajo, TipoCentroTrabajoAdmin)

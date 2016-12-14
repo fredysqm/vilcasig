@@ -80,7 +80,7 @@ class CentroPobladoAdmin(admin.ModelAdmin):
 class PerimetroAdmin(admin.ModelAdmin):
     list_display = ('centro_poblado', 'creado', 'modificado')
     list_select_related = ('centro_poblado', )
-    search_fields = ('centro_poblado',)
+    search_fields = ('centro_poblado__nombre',)
     ordering = ('centro_poblado__nombre', )
     list_per_page = 50
 

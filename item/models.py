@@ -2,7 +2,7 @@ from django.contrib.gis.db import models
 
 
 
-class Oficio(models.Model):
+class TipoOficio(models.Model):
 
     nombre = models.CharField(
             max_length=50,
@@ -23,11 +23,15 @@ class Oficio(models.Model):
 
     def save(self, *args, **kwargs):
         self.nombre = self.nombre.upper()
-        super(Oficio, self).save(*args, **kwargs)
+        super(TipoOficio, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = ('tipo de oficio')
+        verbose_name_plural = ('tipos de oficio')
 
 
 
-class CentroTrabajo(models.Model):
+class TipoCentroTrabajo(models.Model):
 
     nombre = models.CharField(
             max_length=50,
@@ -48,8 +52,8 @@ class CentroTrabajo(models.Model):
 
     def save(self, *args, **kwargs):
         self.nombre = self.nombre.upper()
-        super(CentroTrabajo, self).save(*args, **kwargs)
+        super(TipoCentroTrabajo, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name = ('centro de trabajo')
-        verbose_name_plural = ('centros de trabajo')
+        verbose_name = ('tipo centro de trabajo')
+        verbose_name_plural = ('tipos de centro de trabajo')
