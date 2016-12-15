@@ -39,4 +39,4 @@ Thumbs.db
 .komodotools
 
 # project
-vilcasig/settings/local.py
+#main/settings/local.py
