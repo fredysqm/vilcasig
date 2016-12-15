@@ -1,5 +1,5 @@
 from django.contrib import admin
-from social.models import Ingreso, CentroTrabajo, Oficio, Agricola
+from social.models import Ingreso, CentroTrabajo, Oficio, Agricola, Pecuario
 
 
 
@@ -54,3 +54,15 @@ class AgricolaAdmin(admin.ModelAdmin):
     ordering = ('id', )
     list_per_page = 50
 admin.site.register(Agricola, AgricolaAdmin)
+
+
+
+class PecuarioAdmin(admin.ModelAdmin):
+    list_display = ('id', 'centro_poblado', 'producto', 'cantidad', 'destino', 'creado', 'modificado')
+    list_display_links = ('id', 'centro_poblado', )
+    list_select_related = ('centro_poblado', 'producto')
+    list_filter = ('producto',  'centro_poblado', )
+    search_fields = ('centro_poblado__nombre', 'producto__nombre')
+    ordering = ('id', )
+    list_per_page = 50
+admin.site.register(Pecuario, PecuarioAdmin)

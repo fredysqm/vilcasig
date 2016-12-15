@@ -1,7 +1,7 @@
 from django.contrib.gis.db import models
 from django.core import validators
 from ubigeo.models import CentroPoblado
-from item.models import TipoCentroTrabajo, TipoOficio, TipoProductoAgricola, TipoUnidadMedida, TipoProductoDestino
+from item.models import TipoCentroTrabajo, TipoOficio, TipoProductoAgricola, TipoUnidadMedida, TipoProductoDestino, TipoProductoPecuario
 from decimal import Decimal
 
 
@@ -181,7 +181,7 @@ class Agricola(models.Model):
             verbose_name='Promedio PV',
             help_text='Promedio de precio de venta del producto',
             validators=(
-                    validators.MinValueValidator(Decimal('0.01')),
+                    validators.MinValueValidator(Decimal('0')),
                     validators.MaxValueValidator(Decimal('100000.00')),
                 )
         )
@@ -192,7 +192,7 @@ class Agricola(models.Model):
             verbose_name='Promedio PRV',
             help_text='Promedio de precio de venta del producto, en el mercado local',
             validators=(
-                    validators.MinValueValidator(Decimal('0.01')),
+                    validators.MinValueValidator(Decimal('0')),
                     validators.MaxValueValidator(Decimal('100000.00')),
                 )
         )
@@ -212,3 +212,56 @@ class Agricola(models.Model):
         unique_together= (('centro_poblado', 'producto'),)
         verbose_name = ('producto agricola')
         verbose_name_plural = ('productos agricolas')
+
+
+
+class Pecuario(models.Model):
+
+    centro_poblado = models.ForeignKey(
+            CentroPoblado,
+            verbose_name='Centro poblado',
+        )
+
+    producto = models.ForeignKey(
+            TipoProductoPecuario,
+            verbose_name='Producto',
+            help_text='Tipo de producto pecuario',
+        )
+
+    cantidad = models.PositiveIntegerField(
+            verbose_name='Cantidad',
+            help_text='Nro de unidades de producto, producidas por año'
+        )
+
+    destino = models.ForeignKey(
+            TipoProductoDestino,
+            verbose_name='Destino',
+            help_text='Destino / finalidad del producto',
+        )
+
+    promedio_precio_venta = models.DecimalField(
+            max_digits=8,
+            decimal_places=2,
+            verbose_name='Promedio PV',
+            help_text='Promedio de precio de venta por unidad de producto',
+            validators=(
+                    validators.MinValueValidator(Decimal('0')),
+                    validators.MaxValueValidator(Decimal('10000.00')),
+                )
+        )
+
+    creado = models.DateTimeField(
+            auto_now_add=True,
+        )
+
+    modificado = models.DateTimeField(
+            auto_now=True,
+        )
+
+    def __str__(self):
+        return '%s' % (self.producto.nombre,)
+
+    class Meta:
+        unique_together= (('centro_poblado', 'producto'),)
+        verbose_name = ('producto pecuario')
+        verbose_name_plural = ('productos pecuarios')

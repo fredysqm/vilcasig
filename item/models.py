@@ -149,3 +149,33 @@ class TipoProductoDestino(models.Model):
         verbose_name = ('tipo de destino de producto')
         verbose_name_plural = ('tipos de destino de producto')
         ordering = ('nombre',)
+
+
+
+class TipoProductoPecuario(models.Model):
+
+    nombre = models.CharField(
+            max_length=50,
+            verbose_name='Nombre',
+            help_text='Nombre del producto pecuario'
+        )
+
+    creado = models.DateTimeField(
+            auto_now_add=True,
+        )
+
+    modificado = models.DateTimeField(
+            auto_now=True,
+        )
+
+    def __str__(self):
+        return "%s" % (self.nombre)
+
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.upper()
+        super(TipoProductoPecuario, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = ('tipo de producto pecuario')
+        verbose_name_plural = ('tipos de producto pecuario')
+        ordering = ('nombre',)
