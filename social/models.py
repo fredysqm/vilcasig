@@ -265,3 +265,81 @@ class Pecuario(models.Model):
         unique_together= (('centro_poblado', 'producto'),)
         verbose_name = ('producto pecuario')
         verbose_name_plural = ('productos pecuarios')
+
+
+
+
+#NEW
+class FuenteTrabajo(models.Model):
+
+    centro_poblado = models.OneToOneField(
+            CentroPoblado,
+            primary_key=True,
+            verbose_name='Centro poblado',
+        )
+
+    casa_dep = models.DecimalField(
+            max_digits=5,
+            decimal_places=2,
+            verbose_name='Casa',
+            help_text='Porcentaje de habitantes que trabajan en su casa',
+            validators=(
+                    validators.MinValueValidator(Decimal('0.01')),
+                    validators.MaxValueValidator(Decimal('100.00')),
+                )
+        )
+
+    campo_dep = models.DecimalField(
+            max_digits=5,
+            decimal_places=2,
+            verbose_name='Campo',
+            help_text='Porcentaje de habitantes que trabajan en el campo',
+            validators=(
+                    validators.MinValueValidator(Decimal('0.01')),
+                    validators.MaxValueValidator(Decimal('100.00')),
+                )
+        )
+
+    independiente_dep = models.DecimalField(
+            max_digits=5,
+            decimal_places=2,
+            verbose_name='Independiente',
+            help_text='Porcentaje de habitantes que trabajan de forma independiente',
+            validators=(
+                    validators.MinValueValidator(Decimal('0.01')),
+                    validators.MaxValueValidator(Decimal('100.00')),
+                )
+        )
+
+    publico_dep = models.DecimalField(
+            max_digits=5,
+            decimal_places=2,
+            verbose_name='Sector Público',
+            help_text='Porcentaje de habitantes que trabajan en el sector público',
+            validators=(
+                    validators.MinValueValidator(Decimal('0.01')),
+                    validators.MaxValueValidator(Decimal('100.00')),
+                )
+        )
+
+    privado_dep = models.DecimalField(
+            max_digits=5,
+            decimal_places=2,
+            verbose_name='Sector Privado',
+            help_text='Porcentaje de habitantes que trabajan en el sector privado',
+            validators=(
+                    validators.MinValueValidator(Decimal('0.01')),
+                    validators.MaxValueValidator(Decimal('100.00')),
+                )
+        )
+
+    creado = models.DateTimeField(
+            auto_now_add=True,
+        )
+
+    modificado = models.DateTimeField(
+            auto_now=True,
+        )
+
+    def __str__(self):
+        return "%s" % (self.centro_poblado.nombre)

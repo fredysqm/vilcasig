@@ -1,5 +1,5 @@
 from django.contrib import admin
-from social.models import Ingreso, CentroTrabajo, Oficio, Agricola, Pecuario
+from social.models import Ingreso, CentroTrabajo, Oficio, Agricola, Pecuario, FuenteTrabajo
 
 
 
@@ -18,6 +18,24 @@ class IngresoAdmin(admin.ModelAdmin):
         }),
     )
 admin.site.register(Ingreso, IngresoAdmin)
+
+
+
+class FuenteTrabajoAdmin(admin.ModelAdmin):
+    list_display = ('centro_poblado', 'creado', 'modificado')
+    list_select_related = ('centro_poblado', )
+    search_fields = ('centro_poblado__nombre',)
+    ordering = ('centro_poblado__nombre', )
+    list_per_page = 50
+    fieldsets = (
+        (None, {
+            'fields': ('centro_poblado',)
+        }),
+        ('Fuente de trabajo', {
+            'fields': ('casa_dep','campo_dep','independiente_dep','publico_dep', 'privado_dep'),
+        }),
+    )
+admin.site.register(FuenteTrabajo, FuenteTrabajoAdmin)
 
 
 
