@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib.gis import admin
 from ubigeo.models import Departamento, Provincia, Distrito, CentroPoblado, Perimetro
 
 
@@ -57,7 +57,8 @@ class DistritoAdmin(admin.ModelAdmin):
     )
 
 
-class CentroPobladoAdmin(admin.ModelAdmin):
+class CentroPobladoAdmin(admin.GeoModelAdmin):
+    map_template = 'gis/admin/openlayers_extralayers.html'
     list_display = ('codigo', 'nombre', 'distrito', 'creado', 'modificado')
     list_display_links = ('codigo', 'nombre')
     list_select_related = ('distrito', )
