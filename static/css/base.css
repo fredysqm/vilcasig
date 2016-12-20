@@ -2,23 +2,18 @@ body {
     overflow: hidden;
 }
 
-.navbar-brand {
-    padding: 5px 5px 5px
-}
-
-.navbar-brand>img {
-    display:inline;
-    margin:0 10px;
-    height:100%
-}
-
-.navbar-offset {
-    margin-top: 60px;
+#logo {
+    position: absolute;
+    z-index: 100;
+    top: 7px;
+    bottom: 0px;
+    left: 45px;
+    right: 0px;
 }
 
 #map {
     position: absolute;
-    top: 60px;
+    top: 0px;
     bottom: 0px;
     left: 0px;
     right: 0px;

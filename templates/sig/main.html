@@ -3,32 +3,9 @@
 {% block title %}SIG Vilcabamba{% endblock %}
 
 {% block content %}
-<div class="container">
-    <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'sig_main_url' %}">
-                    <img src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mapas Base <span class="caret"></span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
-<div class="navbar-offset"></div>
+<a  class="navbar-brand" href="{% url 'sig_main_url' %}">
+    <img id="logo" src="{% static 'img/logo.png' %}" />
+</a>
 <div id="map"> </div>
 {% endblock %}
 
@@ -36,6 +13,29 @@
 <script type="text/javascript">
 
     var strWMSVilca = 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi';
+
+
+    var styl_sig_centropoblado_punto = function(feature) {
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                fill: new ol.style.Fill({ color: [255,0,0,0.6] }),
+                stroke: new ol.style.Stroke({ color: [0,0,0,1] }),
+                radius: 5
+            }),
+            text: new ol.style.Text({
+                textAlign: 'left',
+                //textBaseline: baseline,
+                font: 'normal 9px Trebuchet MS',
+                text: feature.get('CP_NOMBRE'),
+                fill: new ol.style.Fill({ color: [0,0,0,1] }),
+                stroke: new ol.style.Stroke({ color: [255,255,255,1], width: 3 }),
+                offsetX: 8,
+                //offsetY: offsetY,
+                //rotation: rotation
+            })
+        })
+    };
+
 
     var sig_layers = [
         new ol.layer.Group({
@@ -50,12 +50,14 @@
                           'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
                     }),
                 }),
+
                 new ol.layer.Tile({
                     title: 'OSM',
                     type: 'base',
                     visible: false,
                     source: new ol.source.OSM(),
                 }),
+
                 new ol.layer.Tile({
                     title: 'BingMaps Aerial',
                     type: 'base',
@@ -69,105 +71,31 @@
             ]
         }),
         new ol.layer.Group({
-            title: 'Capas Disponibles:',
+            title: 'Capas:',
             layers: [
 
-
-                new ol.layer.Tile({
-                    title: 'Vilcabamba',
-                    name: 'Vilcabamba',
-                    description: 'Vilcabamba_',
+                new ol.layer.Vector({
+                    title: 'Centros poblados',
+                    name: 'Centros poblados',
+                    description: 'Centros_poblados_',
                     visible: true,
-                    source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'Dist_Vilcabamba', 'TILED': true }
+                    minResolution: 0.1,
+                    maxResolution: 100,
+                    source: new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=sig_centropoblado_punto&outputFormat=GeoJSON&srsname=EPSG:32718'
                     }),
+                    style: styl_sig_centropoblado_punto,
                 }),
 
                 new ol.layer.Tile({
-                    title: 'Distritos',
-                    name: 'Distrito',
-                    description: 'Distrito_',
+                    title: 'Limites',
+                    name: 'Limites',
+                    description: 'Limites_',
                     visible: true,
                     source: new ol.source.TileWMS({
                         url: strWMSVilca,
-                        params: { 'LAYERS': 'DISTRITO', 'TILED': true }
-                    }),
-                }),
-
-                new ol.layer.Tile({
-                    title: 'Provincias',
-                    name: 'Provincia',
-                    description: 'Provincia_',
-                    visible: true,
-                        source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'PROVINCIA', 'TILED': true }
-                    }),
-                }),
-
-                new ol.layer.Tile({
-                    title: 'Departamentos',
-                    description: 'Departamento_',
-                    visible: true,
-                    source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'DEPARTAMENTO', 'TILED': true }
-                    }),
-                }),
-
-                new ol.layer.Tile({
-                    title: 'Curvas de Nivel',
-                    name: 'Curvas de Nivel',
-                    description: 'Curvas de Nivel_',
-                    visible: false,
-                    source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'CURVAS_NIVEL', 'TILED': true }
-                    }),
-                }),
-
-                new ol.layer.Tile({
-                    title: 'Rios',
-                    name: 'Rios',
-                    description: 'Rios_',
-                    visible: true,
-                    source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'RIOS', 'TILED': true }
-                    }),
-                }),
-
-                new ol.layer.Tile({
-                    title: 'Rios Principales',
-                    name: 'Rios Principales',
-                    description: 'Rios Principales_',
-                    visible: true,
-                    source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'RIOS_POLI', 'TILED': true }
-                    }),
-                }),
-
-                new ol.layer.Tile({
-                    title: 'Centros Poblados',
-                    name: 'Centros Poblados',
-                    description: 'Centros Poblados_',
-                    visible: true,
-                    source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'CCPP', 'TILED': true }
-                    }),
-                }),
-
-                new ol.layer.Tile({
-                    title: 'Predios Matrices',
-                    name: 'Predios Matrices',
-                    description: 'Predios Matrices_',
-                    visible: true,
-                    source: new ol.source.TileWMS({
-                        url: strWMSVilca,
-                        params: { 'LAYERS': 'PREDIOS_MATRICES', 'TILED': true }
+                        params: { 'LAYERS': 'limite', 'TILED': true }
                     }),
                 }),
 
