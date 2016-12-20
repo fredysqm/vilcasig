@@ -59,6 +59,16 @@
                 }),
 
                 new ol.layer.Tile({
+                    title: 'Vilcabamba',
+                    type: 'base',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'vilcabamba_mosaico', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
                     title: 'BingMaps Aerial',
                     type: 'base',
                     visible: true,
