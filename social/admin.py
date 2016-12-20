@@ -1,5 +1,5 @@
 from django.contrib import admin
-from social.models import Ingreso, CentroTrabajo, Oficio, Agricola, Pecuario, FuenteTrabajo
+from social.models import Ingreso, FuenteTrabajo, Oficio, Agricola, Pecuario
 
 
 
@@ -39,18 +39,6 @@ admin.site.register(FuenteTrabajo, FuenteTrabajoAdmin)
 
 
 
-class CentroTrabajoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'centro_poblado', 'tipo_centro_trabajo', 'porcentaje', 'creado', 'modificado')
-    list_display_links = ('id', 'centro_poblado', )
-    list_select_related = ('centro_poblado', 'tipo_centro_trabajo')
-    list_filter = ('tipo_centro_trabajo',  'centro_poblado', )
-    search_fields = ('centro_poblado__nombre', 'tipo_centro_trabajo__nombre')
-    ordering = ('id', )
-    list_per_page = 50
-admin.site.register(CentroTrabajo, CentroTrabajoAdmin)
-
-
-
 class OficioAdmin(admin.ModelAdmin):
     list_display = ('id', 'centro_poblado', 'tipo_oficio', 'porcentaje', 'creado', 'modificado')
     list_display_links = ('id', 'centro_poblado', )
@@ -76,11 +64,17 @@ admin.site.register(Agricola, AgricolaAdmin)
 
 
 class PecuarioAdmin(admin.ModelAdmin):
-    list_display = ('id', 'centro_poblado', 'producto', 'cantidad', 'destino', 'creado', 'modificado')
-    list_display_links = ('id', 'centro_poblado', )
-    list_select_related = ('centro_poblado', 'producto')
-    list_filter = ('producto',  'centro_poblado', )
-    search_fields = ('centro_poblado__nombre', 'producto__nombre')
-    ordering = ('id', )
+    list_display = ('centro_poblado', 'creado', 'modificado')
+    list_select_related = ('centro_poblado', )
+    search_fields = ('centro_poblado__nombre',)
+    ordering = ('centro_poblado__nombre', )
     list_per_page = 50
+    fieldsets = (
+        (None, {
+            'fields': ('centro_poblado',)
+        }),
+        ('Productos pecuarios producidos', {
+            'fields': ('n_aves','n_cuyes','n_ovejas','n_porcinos', 'n_vacunos'),
+        }),
+    )
 admin.site.register(Pecuario, PecuarioAdmin)

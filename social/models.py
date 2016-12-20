@@ -1,7 +1,7 @@
 from django.contrib.gis.db import models
 from django.core import validators
 from ubigeo.models import CentroPoblado
-from item.models import TipoCentroTrabajo, TipoOficio, TipoProductoAgricola, TipoUnidadMedida, TipoProductoDestino, TipoProductoPecuario
+from item.models import TipoOficio, TipoProductoAgricola, TipoUnidadMedida, TipoProductoDestino
 from decimal import Decimal
 
 
@@ -61,48 +61,6 @@ class Ingreso(models.Model):
 
 
 
-class CentroTrabajo(models.Model):
-
-    centro_poblado = models.ForeignKey(
-            CentroPoblado,
-            verbose_name='Centro poblado',
-        )
-
-    tipo_centro_trabajo = models.ForeignKey(
-            TipoCentroTrabajo,
-            verbose_name='Centro de labor',
-            help_text='Tipo de centro de trabajo',
-        )
-
-    porcentaje = models.DecimalField(
-            max_digits=5,
-            decimal_places=2,
-            verbose_name='Porcentaje',
-            help_text='Porcentaje de habitantes que laboran en el centro de trabajo',
-            validators=(
-                    validators.MinValueValidator(Decimal('0.01')),
-                    validators.MaxValueValidator(Decimal('100.00')),
-                )
-        )
-
-    creado = models.DateTimeField(
-            auto_now_add=True,
-        )
-
-    modificado = models.DateTimeField(
-            auto_now=True,
-        )
-
-    def __str__(self):
-        return '%s (%s)' % (self.tipo_centro_trabajo.nombre, self.porcentaje)
-
-    class Meta:
-        unique_together= (('centro_poblado', 'tipo_centro_trabajo'),)
-        verbose_name = ('centro de trabajo')
-        verbose_name_plural = ('centros de trabajo')
-
-
-
 class Oficio(models.Model):
 
     centro_poblado = models.ForeignKey(
@@ -140,8 +98,8 @@ class Oficio(models.Model):
 
     class Meta:
         unique_together= (('centro_poblado', 'tipo_oficio'),)
-        verbose_name = ('Oficio')
-        verbose_name_plural = ('Oficios')
+        verbose_name = ('oficio')
+        verbose_name_plural = ('oficios')
 
 
 
@@ -215,61 +173,6 @@ class Agricola(models.Model):
 
 
 
-class Pecuario(models.Model):
-
-    centro_poblado = models.ForeignKey(
-            CentroPoblado,
-            verbose_name='Centro poblado',
-        )
-
-    producto = models.ForeignKey(
-            TipoProductoPecuario,
-            verbose_name='Producto',
-            help_text='Tipo de producto pecuario',
-        )
-
-    cantidad = models.PositiveIntegerField(
-            verbose_name='Cantidad',
-            help_text='Nro de unidades de producto, producidas por año'
-        )
-
-    destino = models.ForeignKey(
-            TipoProductoDestino,
-            verbose_name='Destino',
-            help_text='Destino / finalidad del producto',
-        )
-
-    promedio_precio_venta = models.DecimalField(
-            max_digits=8,
-            decimal_places=2,
-            verbose_name='Promedio PV',
-            help_text='Promedio de precio de venta por unidad de producto',
-            validators=(
-                    validators.MinValueValidator(Decimal('0')),
-                    validators.MaxValueValidator(Decimal('10000.00')),
-                )
-        )
-
-    creado = models.DateTimeField(
-            auto_now_add=True,
-        )
-
-    modificado = models.DateTimeField(
-            auto_now=True,
-        )
-
-    def __str__(self):
-        return '%s' % (self.producto.nombre,)
-
-    class Meta:
-        unique_together= (('centro_poblado', 'producto'),)
-        verbose_name = ('producto pecuario')
-        verbose_name_plural = ('productos pecuarios')
-
-
-
-
-#NEW
 class FuenteTrabajo(models.Model):
 
     centro_poblado = models.OneToOneField(
@@ -343,3 +246,53 @@ class FuenteTrabajo(models.Model):
 
     def __str__(self):
         return "%s" % (self.centro_poblado.nombre)
+
+
+
+class Pecuario(models.Model):
+
+    centro_poblado = models.OneToOneField(
+            CentroPoblado,
+            primary_key=True,
+            verbose_name='Centro poblado',
+        )
+
+    n_aves = models.PositiveIntegerField(
+            verbose_name='Aves',
+            help_text='Nro de aves producidas por año',
+        )
+
+    n_cuyes = models.PositiveIntegerField(
+            verbose_name='Cuyes',
+            help_text='Nro de cuyes producidos por año',
+        )
+
+    n_ovejas = models.PositiveIntegerField(
+            verbose_name='Ovejas',
+            help_text='Nro de ovejas producias por año',
+        )
+
+    n_porcinos = models.PositiveIntegerField(
+            verbose_name='Porcinos',
+            help_text='Nro de porcinos producidos por año',
+        )
+
+    n_vacunos = models.PositiveIntegerField(
+            verbose_name='Vacunos',
+            help_text='Nro de porcinos producidos por año',
+        )
+
+    creado = models.DateTimeField(
+            auto_now_add=True,
+        )
+
+    modificado = models.DateTimeField(
+            auto_now=True,
+        )
+
+    def __str__(self):
+        return "%s" % (self.centro_poblado.nombre)
+
+    class Meta:
+        verbose_name = ('producto pecuario')
+        verbose_name_plural = ('productos pecuarios')

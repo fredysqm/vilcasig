@@ -155,8 +155,8 @@ class CentroPoblado(models.Model):
         return '%s' % (self.nombre)
 
     class Meta:
-        verbose_name = ('Centro poblado')
-        verbose_name_plural = ('Centros poblados')
+        verbose_name = ('centro poblado')
+        verbose_name_plural = ('centros poblados')
         ordering = ('nombre',)
 
 
