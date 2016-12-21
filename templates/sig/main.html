@@ -55,14 +55,14 @@
                     visible: false,
                     source: new ol.source.XYZ({
                         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/' +
-                          'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                            'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
                     }),
                 }),
 
                 new ol.layer.Tile({
                     title: 'Sat Vilcabamba',
                     type: 'base',
-                    visible: true,
+                    visible: false,
                     source: new ol.source.TileWMS({
                         url: strWMSVilca,
                         params: { 'LAYERS': 'vilcabamba_mosaico', 'TILED': true }
@@ -72,11 +72,21 @@
                 new ol.layer.Tile({
                     title: 'BingMaps Aerial',
                     type: 'base',
-                    visible: true,
+                    visible: false,
                     source: new ol.source.BingMaps({
                         key: 'Ah50MLZcGai9LY5lUAqrOLAMWNDLdp4xjdkNLJYACHuQtqvQ7osDRytwJXnkJDH3',
                         imagerySet: 'Aerial',
                         maxZoom: 30
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Esri World Imagery',
+                    type: 'base',
+                    visible: true,
+                    source: new ol.source.XYZ({
+                        url: 'https://services.arcgisonline.com/arcgis/rest/services/' +
+                            'World_Imagery/MapServer/tile/{z}/{y}/{x}'
                     }),
                 }),
 
