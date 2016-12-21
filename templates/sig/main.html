@@ -14,7 +14,6 @@
 
     var strWMSVilca = 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi';
 
-
     var styl_sig_centropoblado_punto = function(feature) {
         return new ol.style.Style({
             image: new ol.style.Circle({
@@ -38,28 +37,30 @@
 
 
     var sig_layers = [
+
         new ol.layer.Group({
             'title': 'Mapas base:',
             layers: [
-                new ol.layer.Tile({
-                    title: 'Esri XYZ',
-                    type: 'base',
-                    visible: false,
-                    source: new ol.source.XYZ({
-                      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/' +
-                          'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-                    }),
-                }),
 
                 new ol.layer.Tile({
-                    title: 'OSM',
+                    title: 'OpenStreetMap',
                     type: 'base',
                     visible: false,
                     source: new ol.source.OSM(),
                 }),
 
                 new ol.layer.Tile({
-                    title: 'Vilcabamba',
+                    title: 'Esri Topo Map',
+                    type: 'base',
+                    visible: false,
+                    source: new ol.source.XYZ({
+                        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+                          'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Sat Vilcabamba',
                     type: 'base',
                     visible: true,
                     source: new ol.source.TileWMS({
@@ -78,18 +79,33 @@
                         maxZoom: 30
                     }),
                 }),
+
             ]
         }),
+
         new ol.layer.Group({
-            title: 'Capas:',
+            title: 'Centros Poblados:',
             layers: [
 
                 new ol.layer.Vector({
-                    title: 'Centros poblados',
-                    name: 'Centros poblados',
-                    description: 'Centros_poblados_',
+                    title: 'Perimetros',
+                    name: 'sig_centropoblado_perimetro',
+                    description: 'sig_centropoblado_perimetro',
                     visible: true,
-                    minResolution: 0.1,
+                    //minResolution: 0.001,
+                    maxResolution: 20,
+                    source: new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: 'http://sig.mdv.net:9182/cgi-bin/sig/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=sig_centropoblado_perimetro&outputFormat=GeoJSON&srsname=EPSG:32718'
+                    }),
+                }),
+
+                new ol.layer.Vector({
+                    title: 'Puntos',
+                    name: 'sig_centropoblado_punto',
+                    description: 'sig_centropoblado_punto',
+                    visible: true,
+                    //minResolution: 0.1,
                     maxResolution: 100,
                     source: new ol.source.Vector({
                         format: new ol.format.GeoJSON(),
@@ -98,19 +114,49 @@
                     style: styl_sig_centropoblado_punto,
                 }),
 
+            ]
+        }),
+
+        new ol.layer.Group({
+            title: 'Limites:',
+            layers: [
+
                 new ol.layer.Tile({
-                    title: 'Limites',
-                    name: 'Limites',
-                    description: 'Limites_',
+                    title: 'Distrito',
+                    name: 'sig_limite_distrito',
+                    description: 'sig_limite_distrito',
                     visible: true,
                     source: new ol.source.TileWMS({
                         url: strWMSVilca,
-                        params: { 'LAYERS': 'limite', 'TILED': true }
+                        params: { 'LAYERS': 'sig_limite_distrito', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Provincia',
+                    name: 'sig_limite_provincia',
+                    description: 'sig_limite_provincia',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'sig_limite_provincia', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Departamento',
+                    name: 'sig_limite_departamento',
+                    description: 'sig_limite_departamento',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'sig_limite_departamento', 'TILED': true }
                     }),
                 }),
 
             ]
-        })
+        }),
+
     ];
 
 
