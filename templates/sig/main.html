@@ -94,6 +94,85 @@
         }),
 
         new ol.layer.Group({
+            title: 'Topografía:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Curvas Nivel 25m',
+                    name: 'sig_topografia_curvas25m',
+                    description: 'sig_topografia_curvas25m',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'CURVAS_NIVEL_25m', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Cerros',
+                    name: 'sig_topografia_cerros',
+                    description: 'sig_topografia_cerros',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'CERROS', 'TILED': true }
+                    }),
+                }),
+
+                    new ol.layer.Tile({
+                    title: 'Cotas',
+                    name: 'sig_topografia_cotas',
+                    description: 'sig_topografia_cotas',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'COTAS', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+
+        new ol.layer.Group({
+            title: 'Uso de Suelos:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Uso de Suelos',
+                    name: 'sig_usosuelos_main',
+                    description: 'sig_usosuelos_main',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'USO_ACTUAL_SUELOS', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+
+        new ol.layer.Group({
+            title: 'Hidrología:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Rios',
+                    name: 'sig_hidrologia_rios',
+                    description: 'sig_hidrologia_rios',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'RIO_LINEA', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+
+        new ol.layer.Group({
             title: 'Centros Poblados:',
             layers: [
 
@@ -128,7 +207,7 @@
         }),
 
         new ol.layer.Group({
-            title: 'Limites:',
+            title: 'Limites INEI:',
             layers: [
 
                 new ol.layer.Tile({
