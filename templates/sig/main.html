@@ -154,6 +154,42 @@
 
 
         new ol.layer.Group({
+            title: 'Geología:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Geología',
+                    name: 'sig_geologia_main',
+                    description: 'sig_geologia_main',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'GEOLOGICO', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+        new ol.layer.Group({
+            title: 'Vias:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Red Vial',
+                    name: 'sig_vias_redsig_vias_red',
+                    description: 'sig_hidrologia_rios',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'RED_VIAL_VILCABAMBA', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+        new ol.layer.Group({
             title: 'Hidrología:',
             layers: [
 
