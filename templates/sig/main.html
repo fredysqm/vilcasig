@@ -207,24 +207,63 @@
             ]
         }),
 
+        
+        new ol.layer.Group({
+            title: 'Catastro:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Viviendas',
+                    name: 'vivienda',
+                    description: 'vivienda',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'vivienda', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Lotes',
+                    name: 'lote',
+                    description: 'lote',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'lote', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Manzanas',
+                    name: 'manzana',
+                    description: 'manzana',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'manzana', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+        
 
         new ol.layer.Group({
             title: 'Centros Poblados:',
             layers: [
-
-                new ol.layer.Vector({
+                
+                new ol.layer.Tile({
                     title: 'Perimetros',
                     name: 'sig_centropoblado_perimetro',
                     description: 'sig_centropoblado_perimetro',
                     visible: true,
-                    //minResolution: 0.001,
-                    maxResolution: 20,
-                    source: new ol.source.Vector({
-                        format: new ol.format.GeoJSON(),
-                        url: 'http://sig.mdv.net/sigserver/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=sig_centropoblado_perimetro&outputFormat=GeoJSON&srsname=EPSG:32718'
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'sig_centropoblado_perimetro', 'TILED': true }
                     }),
                 }),
-
+                
                 new ol.layer.Vector({
                     title: 'Puntos',
                     name: 'sig_centropoblado_punto',
