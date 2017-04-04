@@ -9,12 +9,6 @@
     <title>{% block title %}{% endblock %}</title>
 
     {% compress css %}
-        <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="/static/css/base.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="/static/css/ol.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="/static/css/ol3-layerswitcher.css" type="text/css" charset="utf-8">
-    {% endcompress %}
-    {% compress css %}
         {% block css %}{% endblock %}
     {% endcompress %}
 </head>
@@ -22,12 +16,6 @@
     {% block content %}{% endblock %}
     {% block modals %}{% endblock %}
 
-    {% compress js %}
-        <script src="/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/static/js/ol.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/static/js/ol3-layerswitcher.js" type="text/javascript" charset="utf-8"></script>
-    {% endcompress %}
     {% compress js %}
         {% block js %}{% endblock %}
     {% endcompress %}
