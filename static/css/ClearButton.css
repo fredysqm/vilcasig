@@ -1,7 +1,7 @@
 .ext-ux-clearbutton {
     width: 12px;
     height: 12px;
-    background-image: url(../gis_icons/clear_textfield.png);
+    background-image: url(/static/img/gis_icons/clear_textfield.png);
     background-position: 0 0;
     background-repeat: no-repeat;
     -moz-user-focus: ignore; /* https://developer.mozilla.org/en/CSS/-moz-user-focus */
