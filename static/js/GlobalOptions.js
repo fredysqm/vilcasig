@@ -253,21 +253,6 @@ var projectTitles = {
   "helloworld": "Hello World"
 };
 
-// Optional list of layers that should be displayed in a different image format,
-// if the default image format is 8bit.
-// The formats are applied in the order of the list, from highest to lowest priority.
-/*
-var layerImageFormats = [
-  {
-    format: "image/png",
-    layers: ["Country"]
-  },
-  {
-    format: "image/jpeg",
-    layers: ["Shaded Relief"]
-  }
-];
-*/
 
 //EPSG projection code of your QGIS project
 var authid = "EPSG:"+3857;
@@ -321,15 +306,7 @@ var OverviewMapOptions = {
 var OverviewMapSize = new OpenLayers.Size(200,200);
 var OverviewMapMaximized = false; // is the overview map opend or closed by default
 var overviewLayer = null;
-if (enableOSMMaps) {
-  overviewLayer = new OpenLayers.Layer.OSM();
-}
-else {
-  overviewLayer = new OpenLayers.Layer.WMS("Overview-Map",
-  serverAndCGI+"?map=/home/web/qgis-web-client/projects/naturalearth_110million.qgs",
-  {layers:"Land",format:"image/png"},
-  {buffer:0,singleTile:true,transitionEffect:"resize"});
-}
+overviewLayer = new OpenLayers.Layer.OSM();
 
 // prevent the user from choosing a print resolution
 // if fixedPrintResolution = null, the user is allowed to choose the print resolution. 

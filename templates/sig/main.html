@@ -11,22 +11,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}" /> 
     <link rel="stylesheet" type="text/css" href="{% static 'css/layerOrderTab.css' %}" />
 
-
     <style type="text/css">
-    
-    #dpiDetection {
-      height: 1in;
-      left: -100%;
-      position: absolute;
-      top: -100%;
-      width: 1in;
-    }
-
+        #dpiDetection {
+            height: 1in;
+            left: -100%;
+            position: absolute;
+            top: -100%;
+            width: 1in;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
-<div id="dpiDetection"></div>
+    <div id="dpiDetection"></div>
 {% endblock %}
 
 {% block js %}
@@ -38,21 +35,18 @@
     <script type="text/javascript" src="{% static 'libs/proj4js/proj4js-compressed.js' %}"></script>
     <script type="text/javascript" src="{% static 'libs/openlayers/OpenLayers.js' %}"></script>
     <script type="text/javascript" src="{% static 'libs/geoext/script/GeoExt.js' %}"></script>
-
+    
     <script type="text/javascript" src="{% static 'js/Translations.js' %}"></script>
-
     <script type="text/javascript" src="{% static 'js/GlobalOptions.js' %}"></script>
-
+    
     <script type="text/javascript" src="{% static 'js/Customizations.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/GISProjectListing.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/GetUrlParams.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/TriStateTree.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/GUI.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/ThemeSwitcher.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/QGISExtensions.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/GeoNamesSearchCombo.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/FeatureInfoDisplay.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/LegendAndMetadataDisplay.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/DXFExport.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/WebgisInit.js' %}"></script>
 {% endblock %}

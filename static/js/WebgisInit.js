@@ -1,28 +1,12 @@
-/*
- *
- * WebgisInit.js -- part of QGIS Web Client
- *
- * Copyright (2010-2013), The QGIS Project All rights reserved.
- * QGIS Web Client is released under a BSD license. Please see
- * https://github.com/qgis/qgis-web-client/blob/master/README
- * for the full text of the license and the list of contributors.
- *
-*/ 
-
 var geoExtMap;
 var layerTree;
 var selectedLayers; //later an array containing all visible (selected) layers
 var selectedQueryableLayers; //later an array of all visible (selected and queryable) layers
 var allLayers; //later an array containing all leaf layers
 var thematicLayer, highlightLayer, featureInfoHighlightLayer;
-var baseOSM; //OSM
-var baseAerial; //OSM
-var mapnik; //OSM
-var cycle; //OSM
 var googleSatelliteLayer;
 var googleMapLayer;
 var bingSatelliteLayer;
-// var bingApiKey = "add Bing api key here"; // http://msdn.microsoft.com/en-us/library/ff428642.aspx
 var exportLayer; // layer for the export box
 var exportBoxValues; //holds properties of export box
 var exportDrawControl, exportModifyControl, exportWindowWithFile; //for high dpi raster export
@@ -120,12 +104,8 @@ Ext.onReady(function () {
 
     //OpenstreetMap background layers
     if (enableOSMMaps) {        
-
         OpenStreetMap= new OpenLayers.Layer.OSM("OpenStreetMap");
         baseLayers.push(OpenStreetMap);
-        //baseLayers.push(baseOSM);
-        //baseLayers.push(cycle);
-        //baseLayers.push(baseAerial);
     }
 
     if (enableGoogleCommercialMaps) {
@@ -326,12 +306,7 @@ function postLoading() {
             layerTree.fireEvent("leafschange");
         });
     }
-    else {
-        //check if DXF exporter should be enabled for this project
-        if (myDXFExporter !== undefined) {
-            myDXFExporter.checkEnabled();
-        }
-    }
+
     
     //test if max extent was set from URL or project settings
     //if not, set map parameters from GetProjectSettings/GetCapabilities
@@ -358,7 +333,7 @@ function postLoading() {
     }
     // never change the map extents when using WMTS base layers
     if (!enableWmtsBaseLayers) {
-    MapOptions.maxExtent = maxExtent;
+        MapOptions.maxExtent = maxExtent;
     }
 
     //now collect all selected layers (with checkbox enabled in tree)
@@ -1668,9 +1643,7 @@ function postLoading() {
                 }
             }]
         });
-        //initialize DXF Exporter
-        myDXFExporter = new DXFExporter("geoExtMapPanel");
-        myDXFExporter.checkEnabled();
+
     }
     else {
         printLayoutsCombobox = Ext.getCmp('PrintLayoutsCombobox');
