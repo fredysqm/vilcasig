@@ -13,7 +13,7 @@ body.ux-layout-center {
     text-align:center;
 }
 td.ux-grid-hd-group-cell {
-    background: url(../../../resources/images/default/grid/grid3-hrow.gif) repeat-x bottom;
+    background: url(/static/libs/ext/resources/images/default/grid/grid3-hrow.gif) repeat-x bottom;
 }.x-column-tree .x-panel-header {
 	padding: 3px 0px 0px 0px;
 	border-bottom-width: 0px;
@@ -63,7 +63,7 @@ td.ux-grid-hd-group-cell {
 
 .x-tree-headers {
 	margin-top: 3px;
-	background: #f9f9f9 url(../../../resources/images/default/grid/grid3-hrow.gif) repeat-x 0 bottom;
+	background: #f9f9f9 url(/static/libs/ext/resources/images/default/grid/grid3-hrow.gif) repeat-x 0 bottom;
 	cursor:default;
     zoom:1;
 }
@@ -110,11 +110,11 @@ td.ux-grid-hd-group-cell {
 }
 
 .x-grid3-hd-row .ux-filtered-column .x-grid3-hd-inner {
-	background-image: url(../images/header_bg.gif);
+	background-image: url(/static/libs/ext/ux/images/header_bg.gif);
 }
 
 .ux-filtered-column .x-grid3-hd-btn {
-	background-image: url(../images/hd-btn.gif);
+	background-image: url(/static/libs/ext/ux/images/hd-btn.gif);
 }
 */
 .x-grid3-hd-row td.ux-filtered-column {   
@@ -123,15 +123,15 @@ td.ux-grid-hd-group-cell {
 }		
 
 .ux-filtered-column.sort-asc .x-grid3-sort-icon {
-	background-image: url(../images/sort_filtered_asc.gif) !important;
+	background-image: url(/static/libs/ext/ux/images/sort_filtered_asc.gif) !important;
 }
 
 .ux-filtered-column.sort-desc .x-grid3-sort-icon {
-	background-image: url(../images/sort_filtered_desc.gif) !important;
+	background-image: url(/static/libs/ext/ux/images/sort_filtered_desc.gif) !important;
 }
 
 .ux-gridfilter-text-icon {
-	background-image: url(../images/find.png) !important;
+	background-image: url(/static/libs/ext/ux/images/find.png) !important;
 }
 
 /* Temporary Patch for Bug ??? */
@@ -152,15 +152,15 @@ li.x-menu-list-item div {
  * RangeMenu Styles
  **/
 .ux-rangemenu-gt {
-	background-image: url(../images/greater_than.png) !important;
+	background-image: url(/static/libs/ext/ux/images/greater_than.png) !important;
 }
 
 .ux-rangemenu-lt {
-	background-image: url(../images/less_than.png) !important;
+	background-image: url(/static/libs/ext/ux/images/less_than.png) !important;
 }
 
 .ux-rangemenu-eq {
-	background-image: url(../images/equals.png) !important;
+	background-image: url(/static/libs/ext/ux/images/equals.png) !important;
 }
 .x-grid3-summary-row {
     border-left:1px solid #fff;
@@ -308,7 +308,7 @@ li.x-menu-list-item div {
 
 /* Tab corners */
 .x-grouptabs-panel .x-grouptabs-corner {
-    background-image: url('../images/x-grouptabs-corners.gif');
+    background-image: url('/static/libs/ext/ux/images/x-grouptabs-corners.gif');
     display: none;
     width: 11px;
     height: 11px;
@@ -361,7 +361,7 @@ li.x-menu-list-item div {
 
 /* General tab styling */
 .x-grouptabs-panel .x-grouptabs-expand {
-	background: transparent url('../images/elbow-plus-nl.gif') no-repeat;
+	background: transparent url('/static/libs/ext/ux/images/elbow-plus-nl.gif') no-repeat;
 	width: 16px;
 	height: 16px;
 	position: absolute;
@@ -375,7 +375,7 @@ li.x-menu-list-item div {
 }
 
 .x-grouptabs-expanded .x-grouptabs-expand {
-	background-image: url('../images/elbow-minus-nl.gif');
+	background-image: url('/static/libs/ext/ux/images/elbow-minus-nl.gif');
 }
 
 /* GroupTabs sub group styling */
@@ -457,7 +457,7 @@ li.x-menu-list-item div {
 } 
 .x-panel-resize {
         height:5px;
-        background:transparent url(../images/panel-handle.gif) no-repeat center bottom;
+        background:transparent url(/static/libs/ext/ux/images/panel-handle.gif) no-repeat center bottom;
         position:relative;
         left:0;
         top:2px;
@@ -506,12 +506,12 @@ li.x-menu-list-item div {
 .x-row-editor-header {
     height:2px;
     overflow:hidden;
-    background: transparent url(../images/row-editor-bg.gif) repeat-x 0 0;
+    background: transparent url(/static/libs/ext/ux/images/row-editor-bg.gif) repeat-x 0 0;
 }
 .x-row-editor-footer {
     height:2px;
     overflow:hidden;
-    background: transparent url(../images/row-editor-bg.gif) repeat-x 0 -2px;
+    background: transparent url(/static/libs/ext/ux/images/row-editor-bg.gif) repeat-x 0 -2px;
 }
 .ext-ie .x-row-editor-footer {
     margin-top:-1px;
@@ -528,14 +528,14 @@ li.x-menu-list-item div {
     top:28px;
     left:20px;
     padding-left:5px;
-    background: transparent url(../images/row-editor-btns.gif) no-repeat 0 0;
+    background: transparent url(/static/libs/ext/ux/images/row-editor-btns.gif) no-repeat 0 0;
 }
 .x-row-editor .x-btns .x-plain-bwrap {
     padding-right:5px;
-    background: transparent url(../images/row-editor-btns.gif) no-repeat right -31px;
+    background: transparent url(/static/libs/ext/ux/images/row-editor-btns.gif) no-repeat right -31px;
 }
 .x-row-editor .x-btns .x-plain-body {
-    background: transparent url(../images/row-editor-btns.gif) repeat-x 0 -62px;
+    background: transparent url(/static/libs/ext/ux/images/row-editor-btns.gif) repeat-x 0 -62px;
     height:31px;
 }
 .x-row-editor .x-btns .x-table-layout-cell {
@@ -559,7 +559,7 @@ li.x-menu-list-item div {
 	/*background-color:#ff00cc;*/
 }
 .x-form-field-wrap .x-form-spinner-trigger {
-    background:transparent url('../images/spinner.gif') no-repeat 0 0;
+    background:transparent url('/static/libs/ext/ux/images/spinner.gif') no-repeat 0 0;
 }
 
 .x-form-field-wrap .x-form-spinner-overup{
@@ -598,7 +598,7 @@ li.x-menu-list-item div {
 .x-form-field-wrap .x-form-spinner-splitter {
 	line-height:1px;
 	font-size:1px;
-    background:transparent url('../images/spinner-split.gif') no-repeat 0 0;
+    background:transparent url('/static/libs/ext/ux/images/spinner-split.gif') no-repeat 0 0;
 	position:absolute;
 	cursor: n-resize;
 }
@@ -687,7 +687,7 @@ li.x-menu-list-item div {
 /* StatusBar - visual */
 
 .x-statusbar .x-status-busy {
-    background-image: url(../images/loading.gif);
+    background-image: url(/static/libs/ext/ux/images/loading.gif);
 }
 .x-statusbar .x-status-text-panel {
     border-color: #99bbe8 #fff #fff #99bbe8;
@@ -699,20 +699,20 @@ li.x-menu-list-item div {
     color: #777;
 }
 #word-status .x-status-busy {
-    background-image: url(../images/saving.gif);
+    background-image: url(/static/libs/ext/ux/images/saving.gif);
 }
 #word-status .x-status-saved {
-    background-image: url(../images/saved.png);
+    background-image: url(/static/libs/ext/ux/images/saved.png);
 }
 
 /* StatusBar form validation example styles */
 
 .x-statusbar .x-status-error {
     color: #C33;
-    background-image: url(../images/exclamation.gif);
+    background-image: url(/static/libs/ext/ux/images/exclamation.gif);
 }
 .x-statusbar .x-status-valid {
-    background-image: url(../images/accept.png);
+    background-image: url(/static/libs/ext/ux/images/accept.png);
 }
 .x-status-error-list {
     border-color: #C33;

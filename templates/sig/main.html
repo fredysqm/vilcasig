@@ -3,50 +3,26 @@
 {% block title %}SIG Vilcabamba{% endblock %}
 
 {% block css %}
-	<link rel="stylesheet" type="text/css" href="{% static 'libs/ext/resources/css/ext-all-notheme.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'libs/ext/resources/css/xtheme-blue.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'libs/ext/ux/css/ux-all.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'css/TriStateTreeAndCheckbox.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'css/ThemeSwitcherDataView.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}" /> 
-	<link rel="stylesheet" type="text/css" href="{% static 'css/layerOrderTab.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'libs/ext/resources/css/ext-all-notheme.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'libs/ext/resources/css/xtheme-blue.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'libs/ext/ux/css/ux-all.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/TriStateTreeAndCheckbox.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ThemeSwitcherDataView.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}" /> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/layerOrderTab.css' %}" />
 
 
-	<style type="text/css">
-	<!--
-	#dpiDetection {
-	  height: 1in;
-	  left: -100%;
-	  position: absolute;
-	  top: -100%;
-	  width: 1in;
-	}
-	 
-	#panel_header_title {
-	  float: left;
-	  font-size: 24px;
-	}
-	#panel_header_link {
-	  float: left;
-	}
-	#panel_header_terms_of_use {
-	  float: right;
-	  font-weight: normal;
-	}
-	#panel_header_lang_switcher {
-	  float: right;
-	  font-weight: normal;
-	}
-	p.DXFExportDisclaimer {
-	  margin-bottom: 0.75em;
-	}
-	h4.DXFExportDisclaimer {
-	  margin-bottom: 1em;
-	}
-	.DXFExportCurrentAreaLabel {
-		color:red;
-	}
-	</style>
+    <style type="text/css">
+    
+    #dpiDetection {
+      height: 1in;
+      left: -100%;
+      position: absolute;
+      top: -100%;
+      width: 1in;
+    }
+
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -55,39 +31,28 @@
 
 {% block js %}
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCfekdyTCwX8OHMzxKndFWLG2rUMqQvNTo"></script>
-<!--
-	<script type="text/javascript" src="libs/ext/adapter/ext/ext-base.js"></script>
--->
-    <script type="text/javascript" src="{% static 'libs/ext/adapter/ext/ext-base-debug.js' %}"></script>
-<!--
-	<script type="text/javascript" src="libs/ext/ext-all.js"></script>
--->
-    <script type="text/javascript" src="{% static 'libs/ext/ext-all-debug-w-comments.js' %}"></script>
-	<script type="text/javascript" src="{% static 'libs/ext/ux/ux-all.js' %}"></script>
-	<script type="text/javascript" src="{% static 'libs/proj4js/proj4js-compressed.js' %}"></script>
-	<script type="text/javascript" src="{% static 'libs/openlayers/OpenLayers.js' %}"></script>
-	<script type="text/javascript" src="{% static 'libs/geoext/script/GeoExt.js' %}"></script>
-    <!-- Uncomment this line and delete the following if you have created a custom translations file -->
-<!--
-    <script type="text/javascript" src="js/Translations_custom.js"></script>
--->
-	<script type="text/javascript" src="{% static 'js/Translations.js' %}"></script>
     
-	<!-- before using QGIS Webclient you need to edit the GlobalOptions.js file-->
-	<!-- you can start from one of the templates -->
-	<script type="text/javascript" src="{% static 'js/GlobalOptions.js' %}"></script>
-	<!-- before using the ThemeSwitcher in QGIS Webclient you need to edit the GISProjectListing.js file and -->
-	<!-- you also need to place 300x200 pixel thumbnails with projectname.png in site/thumbnails -->
-	<script type="text/javascript" src="{% static 'js/Customizations.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/GISProjectListing.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/GetUrlParams.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/TriStateTree.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/GUI.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/ThemeSwitcher.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/QGISExtensions.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/GeoNamesSearchCombo.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/FeatureInfoDisplay.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/LegendAndMetadataDisplay.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/DXFExport.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/WebgisInit.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/ext/adapter/ext/ext-base-debug.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/ext/ext-all-debug-w-comments.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/ext/ux/ux-all.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/proj4js/proj4js-compressed.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/openlayers/OpenLayers.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/geoext/script/GeoExt.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/Translations.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/GlobalOptions.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/Customizations.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/GISProjectListing.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/GetUrlParams.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/TriStateTree.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/GUI.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ThemeSwitcher.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/QGISExtensions.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/GeoNamesSearchCombo.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/FeatureInfoDisplay.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/LegendAndMetadataDisplay.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/DXFExport.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/WebgisInit.js' %}"></script>
 {% endblock %}
