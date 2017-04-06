@@ -375,7 +375,7 @@ Proj4js = {
      * Property: libPath
      * internal: http server path to library code.
      */
-    libPath: null,
+    libPath: "/static/libs/proj4js/",
 
     /**
      * Function: getScriptLocation
