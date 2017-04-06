@@ -522,7 +522,6 @@ function postLoading() {
             renderTo: MapPanelRef.body,
             plugins: [printExtent]
         });
-
     }
     else {
         thematicLayer.name = layerTree.root.firstChild.text;
@@ -1702,6 +1701,9 @@ function postLoading() {
 
     // run the function in the Customizations.js
     customAfterMapInit();
+    
+    /* MAP CENTER */
+    geoExtMap.map.setCenter(new OpenLayers.LonLat(-8131685.9,-1473663.7), 11);
 }
 
 function getVisibleLayers(visibleLayers, currentNode){
