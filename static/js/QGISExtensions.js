@@ -189,13 +189,6 @@ Ext.extend(QGIS.WMSCapabilitiesLoader, GeoExt.tree.WMSCapabilitiesLoader, {
                 if(parts.length > 0) {
                     layer.prefix = parts[0];
 
-
-
-
-
-
-
-
                 }
 
                 capability.layers.push(layer);
