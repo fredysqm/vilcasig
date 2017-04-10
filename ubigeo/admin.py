@@ -1,5 +1,7 @@
 from django.contrib.gis import admin
-from ubigeo.models import Departamento, Provincia, Distrito, CentroPoblado, Perimetro
+from django.contrib.gis.db import models
+from django.forms.widgets import Textarea
+from ubigeo.models import Departamento, Provincia, Distrito, CentroPoblado
 
 
 class DepartamentoAdmin(admin.ModelAdmin):
@@ -57,8 +59,7 @@ class DistritoAdmin(admin.ModelAdmin):
     )
 
 
-class CentroPobladoAdmin(admin.GeoModelAdmin):
-    map_template = 'gis/admin/openlayers_extralayers.html'
+class CentroPobladoAdmin(admin.ModelAdmin):
     list_display = ('codigo', 'nombre', 'distrito', 'creado', 'modificado')
     list_display_links = ('codigo', 'nombre')
     list_select_related = ('distrito', )
@@ -75,19 +76,13 @@ class CentroPobladoAdmin(admin.GeoModelAdmin):
             'fields': ('geom',),
         }),
     )
+    formfield_overrides = {
+        models.MultiPointField: {'widget': Textarea }
+    }
 
-
-
-class PerimetroAdmin(admin.ModelAdmin):
-    list_display = ('centro_poblado', 'creado', 'modificado')
-    list_select_related = ('centro_poblado', )
-    search_fields = ('centro_poblado__nombre',)
-    ordering = ('centro_poblado__nombre', )
-    list_per_page = 50
 
 
 admin.site.register(Departamento, DepartamentoAdmin,)
 admin.site.register(Provincia, ProvinciaAdmin,)
 admin.site.register(Distrito, DistritoAdmin,)
 admin.site.register(CentroPoblado, CentroPobladoAdmin,)
-admin.site.register(Perimetro, PerimetroAdmin)

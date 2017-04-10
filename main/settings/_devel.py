@@ -19,6 +19,7 @@ INSTALLED_APPS = (
     'ubigeo',
     'social',
     'item',
+    'catastro',
     'debug_toolbar',
 )
 
