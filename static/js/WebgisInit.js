@@ -1703,7 +1703,7 @@ function postLoading() {
     customAfterMapInit();
     
     /* MAP CENTER */
-    geoExtMap.map.setCenter(new OpenLayers.LonLat(-8131685.9,-1473663.7), 11);
+    geoExtMap.map.setCenter(new OpenLayers.LonLat(706704.6,8553299.7), 7);
 }
 
 function getVisibleLayers(visibleLayers, currentNode){

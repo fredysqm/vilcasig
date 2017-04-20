@@ -10,7 +10,7 @@ var customGetUrlParamsParser = null;
 //Servername (optional) and path and name name of QGIS Server FCGI-file
 //either with or without server-name - without servername recommended for easier porting to other servers
 //do not add a ? or & after the .fcgi extension
-var serverAndCGI = "http://sig.mdv.net/sigserver/qgis_mapserv.fcgi/";
+var serverAndCGI = "http://localhost/sigserver/qgis_mapserv.fcgi/";
 
 //Optional url for print server hosted on a different server. Default: same as above.
 // var serverAndCGI = "http://otherserver/cgi-bin/qgis_mapserv.fcgi";
@@ -76,25 +76,22 @@ var enablePermalink = false;
 var permaLinkURLShortener = null; // "/wsgi/createShortPermalink.wsgi";
 
 // enable to use commercial Google and Bing layers (also add BingApiKey)
-var enableBingCommercialMaps = true;
+var enableBingCommercialMaps = false;
 
 if (enableBingCommercialMaps) {
     var bingApiKey = "Ah50MLZcGai9LY5lUAqrOLAMWNDLdp4xjdkNLJYACHuQtqvQ7osDRytwJXnkJDH3"; // http://msdn.microsoft.com/en-us/library/ff428642.aspx
 }
 
-var enableGoogleCommercialMaps = true;
+var enableGoogleCommercialMaps = false;
 
 var enableOSMMaps = false;
 
 var enableBGMaps = false;
 if (enableBingCommercialMaps || enableOSMMaps || enableGoogleCommercialMaps) {
-	enableBGMaps = true;
+    enableBGMaps = true;
 }
 if (enableBGMaps) {
-	// enter the index of the backgroundLayer to be visible after loading,
-	// set to a value < 0 to not show any backgroundLayer
-	// this setting is overridden if a value for url-parameter visibleBackgroundLayer is passed
-	var initialBGMap = 0;
+    var initialBGMap = 0;
 }
 
 // enable to use WMTS base layers
@@ -255,7 +252,7 @@ var projectTitles = {
 
 
 //EPSG projection code of your QGIS project
-var authid = "EPSG:"+3857;
+var authid = "EPSG:"+32718;
 
 //background transparency for the QGIS Server generated layer (commercial background layers not effected)
 //set to true if you want the background to be transparent, layer image will be bigger (32 vs 24bit)

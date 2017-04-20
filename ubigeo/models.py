@@ -1,119 +1,132 @@
 from django.contrib.gis.db import models
+from django.core import validators
 
 
 
 class Departamento(models.Model):
 
     codigo = models.CharField(
-            primary_key=True,
-            max_length=2,
-            verbose_name='Ubigeo',
-            help_text='Ubigeo según INEI',
-        )
+                primary_key=True,
+                max_length=2,
+                verbose_name='Ubigeo',
+                help_text='Ubigeo según INEI',
+                validators=[
+                    validators.RegexValidator(
+                        regex='^[0-9]{2}$',
+                        message='Debe ingresar dos dígitos.',
+                    ),
+                ]
+            )
 
     nombre = models.CharField(
-            max_length=50,
-            verbose_name='Nombre',
-            help_text='Nombre del departamento',
-        )
+                max_length=50,
+                verbose_name='Nombre',
+                help_text='Nombre del departamento',
+            )
 
     geom = models.MultiPolygonField(
-            srid=32718,
-            verbose_name='Geometria',
-            help_text='Geometria asociada al departamento',
-        )
+                srid=32718,
+                verbose_name='Geometría',
+                help_text='Geometría asociada al departamento',
+            )
 
-    creado = models.DateTimeField(
-            auto_now_add=True,
-        )
-
-    modificado = models.DateTimeField(
-            auto_now=True,
-        )
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
 
     def __str__(self):
         return '%s' % (self.nombre)
 
+    def save(self):
+        self.nombre = self.nombre.upper()
+        super(Departamento, self).save()
 
 
 class Provincia(models.Model):
 
     codigo = models.CharField(
-            primary_key=True,
-            max_length=4,
-            verbose_name='Ubigeo',
-            help_text='Ubigeo según INEI',
-        )
+                primary_key=True,
+                max_length=4,
+                verbose_name='Ubigeo',
+                help_text='Ubigeo según INEI',
+                validators=[
+                    validators.RegexValidator(
+                        regex='^[0-9]{4}$',
+                        message='Debe ingresar cuatro dígitos.',
+                    ),
+                ]
+            )
 
     departamento = models.ForeignKey(
-            Departamento,
-            verbose_name='Departamento',
-            help_text='Departamento al que pertenece la provincia',
-        )
+                Departamento,
+                verbose_name='Departamento',
+                help_text='Departamento al que pertenece la provincia',
+            )
 
     nombre = models.CharField(
-            max_length=100,
-            verbose_name='Nombre',
-            help_text='Nombre de la provincia',
-        )
+                max_length=100,
+                verbose_name='Nombre',
+                help_text='Nombre de la provincia',
+            )
 
     geom = models.MultiPolygonField(
-            srid=32718,
-            verbose_name='Geometria',
-            help_text='Geometria asociada a la provincia',
-        )
+                srid=32718,
+                verbose_name='Geometría',
+                help_text='Geometría asociada a la provincia',
+            )
 
-    creado = models.DateTimeField(
-            auto_now_add=True,
-        )
-
-    modificado = models.DateTimeField(
-            auto_now=True,
-        )
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
 
     def __str__(self):
         return '%s, %s' % (self.departamento.nombre, self.nombre)
 
+    def save(self):
+        self.nombre = self.nombre.upper()
+        super(Provincia, self).save()
 
 
 class Distrito(models.Model):
 
     codigo = models.CharField(
-            primary_key=True,
-            max_length=6,
-            verbose_name='Ubigeo',
-            help_text='Ubigeo según INEI',
-        )
+                primary_key=True,
+                max_length=6,
+                verbose_name='Ubigeo',
+                help_text='Ubigeo según INEI',
+                validators=[
+                    validators.RegexValidator(
+                        regex='^[0-9]{6}$',
+                        message='Debe ingresar seis dígitos.',
+                    ),
+                ]
+            )
 
     provincia = models.ForeignKey(
-            Provincia,
-            verbose_name='Provincia',
-            help_text='Provincia a la que pertenece el distrito',
-        )
+                Provincia,
+                verbose_name='Provincia',
+                help_text='Provincia a la que pertenece el distrito',
+            )
 
     nombre = models.CharField(
-            max_length=100,
-            verbose_name='Nombre',
-            help_text='Nombre del distrito',
-        )
+                max_length=100,
+                verbose_name='Nombre',
+                help_text='Nombre del distrito',
+            )
 
     geom = models.MultiPolygonField(
-            srid=32718,
-            verbose_name='Geometria',
-            help_text='Geometria asociada al distrito',
-        )
+                srid=32718,
+                verbose_name='Geometría',
+                help_text='Geometría asociada al distrito',
+            )
 
-    creado = models.DateTimeField(
-            auto_now_add=True,
-        )
-
-    modificado = models.DateTimeField(
-            auto_now=True,
-        )
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def __str__(self):
         return '%s, %s' % (self.provincia.nombre, self.nombre)
 
+    def save(self):
+        self.nombre = self.nombre.upper()
+        super(Distrito, self).save()
 
 
 class CentroPoblado(models.Model):
