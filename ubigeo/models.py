@@ -30,6 +30,7 @@ class Departamento(models.Model):
                 help_text='Geometría asociada al departamento, (WKT, EPSG:32718)',
             )
 
+    _centroid = models.PointField(srid=32718,)
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -38,6 +39,7 @@ class Departamento(models.Model):
 
     def save(self):
         self.nombre = self.nombre.upper()
+        self._centroid = self.geom.centroid
         super(Departamento, self).save()
 
 
@@ -74,6 +76,7 @@ class Provincia(models.Model):
                 help_text='Geometría asociada a la provincia, (WKT, EPSG:32718)',
             )
 
+    _centroid = models.PointField(srid=32718,)
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -82,6 +85,7 @@ class Provincia(models.Model):
 
     def save(self):
         self.nombre = self.nombre.upper()
+        self._centroid = self.geom.centroid
         super(Provincia, self).save()
 
 
@@ -118,6 +122,7 @@ class Distrito(models.Model):
                 help_text='Geometría asociada al distrito, (WKT, EPSG:32718)',
             )
 
+    _centroid = models.PointField(srid=32718,)
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -126,6 +131,7 @@ class Distrito(models.Model):
 
     def save(self):
         self.nombre = self.nombre.upper()
+        self._centroid = self.geom.centroid
         super(Distrito, self).save()
 
 
@@ -156,13 +162,13 @@ class CentroPoblado(models.Model):
                 help_text='Nombre del centro poblado',
             )
 
-    geom = models.PointField(
+    geom = models.PolygonField(
                 srid=32718,
                 verbose_name='Geometría',
                 help_text='Geometría asociada al centro poblado, (WKT, EPSG:32718)',
             )
 
-    _centroide = models.PointField(srid=32718,)
+    _centroid = models.PointField(srid=32718,)
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -171,7 +177,7 @@ class CentroPoblado(models.Model):
 
     def save(self):
         self.nombre = self.nombre.upper()
-        self.centroide = self.geom.centroid
+        self._centroid = self.geom.centroid
         super(CentroPoblado, self).save()
 
     class Meta:

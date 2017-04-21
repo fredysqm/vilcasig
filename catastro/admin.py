@@ -1,12 +1,11 @@
 from django.contrib.gis import admin
 from django.contrib.gis.db import models
 from django.forms.widgets import Textarea
-from catastro.models import Perimetro
+from catastro.models import Sector
 
 
-
-class PerimetroAdmin(admin.ModelAdmin):
-    list_display = ('centro_poblado', 'creado', 'modificado')
+class SectorAdmin(admin.ModelAdmin):
+    list_display = ('centro_poblado', 'nombre', 'creado', 'modificado')
     list_select_related = ('centro_poblado', )
     search_fields = ('centro_poblado__nombre',)
     ordering = ('centro_poblado__nombre', )

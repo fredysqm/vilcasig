@@ -5,24 +5,23 @@ from ubigeo.models import Departamento, Provincia, Distrito, CentroPoblado
 
 
 class DepartamentoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'creado', 'modificado')
+    list_display = ('codigo', 'nombre', '_creado', '_modificado')
     list_display_links = ('codigo', 'nombre')
     search_fields = ('codigo', 'nombre',)
     ordering = ('codigo', )
     list_per_page = 25
+    formfield_overrides = {
+        models.MultiPolygonField: {'widget': Textarea }
+    }
     fieldsets = (
-        (None, {
-            'fields': ('codigo', 'nombre',)
-        }),
-        ('Geometria', {
-            'classes': ('collapse',),
-            'fields': ('geom',),
+        ('None', {
+            'fields': ('codigo', 'nombre', 'geom')
         }),
     )
 
 
 class ProvinciaAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'departamento', 'creado', 'modificado')
+    list_display = ('codigo', 'nombre', 'departamento', '_creado', '_modificado')
     list_display_links = ('codigo', 'nombre')
     list_select_related = ('departamento', )
     raw_id_fields = ('departamento',)
@@ -30,37 +29,36 @@ class ProvinciaAdmin(admin.ModelAdmin):
     list_filter = ('departamento', )
     ordering = ('codigo', )
     list_per_page = 25
+    formfield_overrides = {
+        models.MultiPolygonField: {'widget': Textarea }
+    }
     fieldsets = (
         (None, {
-            'fields': ('codigo', 'nombre', 'departamento')
-        }),
-        ('Geometria', {
-            'classes': ('collapse',),
-            'fields': ('geom',),
+            'fields': ('codigo', 'nombre', 'departamento', 'geom')
         }),
     )
 
+
 class DistritoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'provincia', 'creado', 'modificado')
+    list_display = ('codigo', 'nombre', 'provincia', '_creado', '_modificado')
     list_display_links = ('codigo', 'nombre')
     list_select_related = ('provincia', )
     raw_id_fields = ('provincia',)
     search_fields = ('codigo', 'nombre',)
     ordering = ('codigo', )
     list_per_page = 25
+    formfield_overrides = {
+        models.MultiPolygonField: {'widget': Textarea }
+    }
     fieldsets = (
         (None, {
-            'fields': ('codigo', 'nombre', 'provincia')
-        }),
-        ('Geometria', {
-            'classes': ('collapse',),
-            'fields': ('geom',),
+            'fields': ('codigo', 'nombre', 'provincia', 'geom')
         }),
     )
 
 
 class CentroPobladoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'distrito', 'creado', 'modificado')
+    list_display = ('codigo', 'nombre', 'distrito', '_creado', '_modificado')
     list_display_links = ('codigo', 'nombre')
     list_select_related = ('distrito', )
     raw_id_fields = ('distrito',)
@@ -69,15 +67,11 @@ class CentroPobladoAdmin(admin.ModelAdmin):
     list_per_page = 50
     fieldsets = (
         (None, {
-            'fields': ('codigo', 'nombre', 'distrito')
-        }),
-        ('Geometria', {
-            'classes': ('collapse',),
-            'fields': ('geom',),
+            'fields': ('codigo', 'nombre', 'distrito', 'geom')
         }),
     )
     formfield_overrides = {
-        models.MultiPointField: {'widget': Textarea }
+        models.PolygonField: {'widget': Textarea }
     }
 
 
