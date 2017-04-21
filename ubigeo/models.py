@@ -27,7 +27,7 @@ class Departamento(models.Model):
     geom = models.MultiPolygonField(
                 srid=32718,
                 verbose_name='Geometría',
-                help_text='Geometría asociada al departamento',
+                help_text='Geometría asociada al departamento, (WKT, EPSG:32718)',
             )
 
     _creado = models.DateTimeField(auto_now_add=True,)
@@ -71,7 +71,7 @@ class Provincia(models.Model):
     geom = models.MultiPolygonField(
                 srid=32718,
                 verbose_name='Geometría',
-                help_text='Geometría asociada a la provincia',
+                help_text='Geometría asociada a la provincia, (WKT, EPSG:32718)',
             )
 
     _creado = models.DateTimeField(auto_now_add=True,)
@@ -115,11 +115,11 @@ class Distrito(models.Model):
     geom = models.MultiPolygonField(
                 srid=32718,
                 verbose_name='Geometría',
-                help_text='Geometría asociada al distrito',
+                help_text='Geometría asociada al distrito, (WKT, EPSG:32718)',
             )
 
-    creado = models.DateTimeField(auto_now_add=True,)
-    modificado = models.DateTimeField(auto_now=True,)
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
 
     def __str__(self):
         return '%s, %s' % (self.provincia.nombre, self.nombre)
@@ -132,40 +132,47 @@ class Distrito(models.Model):
 class CentroPoblado(models.Model):
 
     codigo = models.CharField(
-            primary_key=True,
-            max_length=3,
-            verbose_name='Código',
-            help_text='Código del centro poblado',
-        )
+                primary_key=True,
+                max_length=3,
+                verbose_name='Código',
+                help_text='Código del centro poblado',
+                validators=[
+                    validators.RegexValidator(
+                        regex='^[0-9]{3}$',
+                        message='Debe ingresar tres dígitos.',
+                    ),
+                ]
+            )
 
     distrito = models.ForeignKey(
-            Distrito,
-            verbose_name='Distrito',
-            help_text='Distrito al que pertenece el centro poblado',
-        )
+                Distrito,
+                verbose_name='Distrito',
+                help_text='Distrito al que pertenece el centro poblado',
+            )
 
     nombre = models.CharField(
-            max_length=100,
-            verbose_name='Nombre',
-            help_text='Nombre del centro poblado',
-        )
+                max_length=100,
+                verbose_name='Nombre',
+                help_text='Nombre del centro poblado',
+            )
 
-    geom = models.MultiPointField(
-            srid=32718,
-            verbose_name='Geometria',
-            help_text='Geometria asociada al centro poblado',
-        )
+    geom = models.PointField(
+                srid=32718,
+                verbose_name='Geometría',
+                help_text='Geometría asociada al centro poblado, (WKT, EPSG:32718)',
+            )
 
-    creado = models.DateTimeField(
-            auto_now_add=True,
-        )
-
-    modificado = models.DateTimeField(
-            auto_now=True,
-        )
+    _centroide = models.PointField(srid=32718,)
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
 
     def __str__(self):
         return '%s' % (self.nombre)
+
+    def save(self):
+        self.nombre = self.nombre.upper()
+        self.centroide = self.geom.centroid
+        super(CentroPoblado, self).save()
 
     class Meta:
         verbose_name = ('centro poblado')
