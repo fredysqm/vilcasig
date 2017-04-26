@@ -137,19 +137,6 @@ class Distrito(models.Model):
 
 class CentroPoblado(models.Model):
 
-    codigo = models.CharField(
-                primary_key=True,
-                max_length=3,
-                verbose_name='Código',
-                help_text='Código del centro poblado',
-                validators=[
-                    validators.RegexValidator(
-                        regex='^[0-9]{3}$',
-                        message='Debe ingresar tres dígitos.',
-                    ),
-                ]
-            )
-
     distrito = models.ForeignKey(
                 Distrito,
                 verbose_name='Distrito',
@@ -173,7 +160,7 @@ class CentroPoblado(models.Model):
     _modificado = models.DateTimeField(auto_now=True,)
 
     def __str__(self):
-        return '%s' % (self.nombre)
+        return '%s (%s)' % (self.nombre, self.distrito)
 
     def save(self):
         self.nombre = self.nombre.upper()
@@ -184,4 +171,3 @@ class CentroPoblado(models.Model):
         verbose_name = ('centro poblado')
         verbose_name_plural = ('centros poblados')
         ordering = ('nombre',)
-

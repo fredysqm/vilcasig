@@ -14,7 +14,7 @@ class DepartamentoAdmin(admin.ModelAdmin):
         models.MultiPolygonField: {'widget': Textarea }
     }
     fieldsets = (
-        ('None', {
+        (None, {
             'fields': ('codigo', 'nombre', 'geom')
         }),
     )
@@ -58,16 +58,16 @@ class DistritoAdmin(admin.ModelAdmin):
 
 
 class CentroPobladoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'nombre', 'distrito', '_creado', '_modificado')
-    list_display_links = ('codigo', 'nombre')
+    list_display = ('nombre', 'distrito', '_creado', '_modificado')
+    list_display_links = ('nombre',)
     list_select_related = ('distrito', )
     raw_id_fields = ('distrito',)
-    search_fields = ('codigo', 'nombre',)
+    search_fields = ('nombre',)
     ordering = ('nombre', )
     list_per_page = 50
     fieldsets = (
         (None, {
-            'fields': ('codigo', 'nombre', 'distrito', 'geom')
+            'fields': ('nombre', 'distrito', 'geom')
         }),
     )
     formfield_overrides = {
