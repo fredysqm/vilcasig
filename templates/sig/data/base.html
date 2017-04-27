@@ -18,11 +18,11 @@
     {% endcompress %}
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="navbar navbar-default navbar-fixed-top" >
         <div class="container">
             <div class="navbar-header">
                 <a href="#" class="navbar-brand">
-                    <img src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
+                    <strong>SIG Vilcabamba</strong>
                 </a>
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                     <span class="sr-only">Toggle navigation</span>
@@ -32,7 +32,21 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
-                {% block menu %}{% endblock %}
+                <ul class="nav navbar-nav">
+                    {% block menu %}{% endblock %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{ user.username }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url "auth_logout" %}">Salir</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>

@@ -14,6 +14,7 @@ INSTALLED_APPS = (
     #3rd
     'compressor',
     'rest_framework',
+    'crispy_forms',
     #me
     'sig',
     'ubigeo',
