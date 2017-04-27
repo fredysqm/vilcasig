@@ -1,4 +1,4 @@
-{% extends 'base.html' %}{% load staticfiles %}
+{% extends 'sigclient/base.html' %}{% load staticfiles %}
 
 {% block title %}SIG Vilcabamba{% endblock %}
 
@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'libs/ext/ux/css/ux-all.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/TriStateTreeAndCheckbox.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/ThemeSwitcherDataView.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}" /> 
+<link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/layerOrderTab.css' %}" />
 
 <style type="text/css">
@@ -24,7 +24,7 @@
 
 {% block content %}
     <div id="dpiDetection"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCfekdyTCwX8OHMzxKndFWLG2rUMqQvNTo"></script>
+<!--     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCfekdyTCwX8OHMzxKndFWLG2rUMqQvNTo"></script> -->
 {% endblock %}
 
 {% block js %}
