@@ -15,11 +15,8 @@
 
                         <fieldset>
 
-                        {% csrf_token %}
-                        {{ form.as_p }}
-
-                        <button type="submit">Login</button>
-
+                            {% csrf_token %}
+                            {{ form.as_p }}
 
                             <div class="form-group">
                                 <input class="form-control" placeholder="Usuario" name="usuario" type="email" autofocus>
@@ -35,9 +32,7 @@
                               </div>
                             </div>
 
-                            <a href="index.html" class="btn btn-lg btn-success btn-block">Iniciar sesión</a>
-                            <hr />
-                            <small>División de Desarrollo Urbano y Rural</small>
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Iniciar sesión</button>
                         </fieldset>
                     </form>
                 </div>
