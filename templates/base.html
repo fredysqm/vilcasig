@@ -10,7 +10,7 @@
 
     {% compress css %}
         <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="/static/css/bootstrap-theme.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="/static/css/font-awesome.css" type="text/css" charset="utf-8">
         <link rel="stylesheet" href="/static/css/base.css" type="text/css" charset="utf-8">
     {% endcompress %}
     {% compress css %}
@@ -21,8 +21,8 @@
     <div class="navbar navbar-default navbar-fixed-top" >
         <div class="container">
             <div class="navbar-header">
-                <a href="#" class="navbar-brand">
-                    <strong>SIG Vilcabamba</strong>
+                <a href="{% url 'sig_data_main' %}" class="navbar-brand">
+                    <img src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
                 </a>
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                     <span class="sr-only">Toggle navigation</span>
@@ -38,11 +38,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                     <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{ user.username }} <span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><span class="glyphicon glyphicon-user"></span> {{ user.username }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Perfil</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url "auth_logout" %}">Salir</a></li>
+                            <li><a href="{% url 'auth_password_change' %}"><i class="fa fa-key" aria-hidden="true"></i> Cambiar contraseña</a></li>
+                            <li><a href="{% url 'auth_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
                         </ul>
                     </li>
                     {% endif %}

@@ -1,17 +1,13 @@
-{% extends "registration/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
-<p>
-    <ul class="nav nav-tabs">
-    </ul>
-</p>
-
-<div class="well bs-component">
-    <legend><span class="glyphicon glyphicon-lock"></span> ¡Sesion cerrada!</legend>
-    <p>
-        Has cerrado correctamente tu sesión.
-        <h5>Continuar <a href="{% url 'preguntas_ultimas_url' %}">visitando</a> el sitio</h5>
-        <h5>Volver a <a href="{% url 'auth_login' %}">iniciar sesión</a></h5>
-    </p>
+<div class="container">
+    <div class="well bs-component">
+        <legend><span class="glyphicon glyphicon-lock"></span> ¡Sesión cerrada!</legend>
+        <p>
+            Ha cerrado correctamente su sesión.
+            <h5>Volver a <a href="{% url 'sig_data_main' %}"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></h5>
+        </p>
+    </div>
 </div>
 {% endblock %}
