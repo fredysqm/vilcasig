@@ -64,6 +64,6 @@ COMPRESS_OUTPUT_DIR = ''
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-LOGIN_URL = 'auth/login'
+LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL = '/'
 #LOGOUT_REDIRECT_URL = '/'
