@@ -11,46 +11,59 @@
     {% compress css %}
         <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css" charset="utf-8">
         <link rel="stylesheet" href="/static/css/font-awesome.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="/static/css/base.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" charset="utf-8">
     {% endcompress %}
     {% compress css %}
         {% block css %}{% endblock %}
     {% endcompress %}
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" >
-        <div class="container">
-            <div class="navbar-header">
-                <a href="{% url 'sig_data_main' %}" class="navbar-brand">
-                    <img src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
-                </a>
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
-                    {% block menu %}{% endblock %}
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                    <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><span class="glyphicon glyphicon-user"></span> {{ user.username }} <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'autenticacion_password_change' %}"><i class="fa fa-key" aria-hidden="true"></i> Cambiar contraseña</a></li>
-                            <li><a href="{% url 'autenticacion_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
-                </ul>
+
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                <div style="padding: 8px 8px 8px 15px; font-size: 20px; background: #2c3e50;" >
+                    <a href="{% url 'sig_data_main' %}">
+                        <img style="margin-right: 6px;" src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
+                    </a>
+                </div>
+                {% if user.is_authenticated %}
+                <div style="padding-left: 15px;">
+                    <h5>CONTENIDO</h5>
+                </div>
+                <li>
+                    <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-key fa-stack-1x "></i></span>Item1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Item2</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Item3</a>
+                </li>
+
+                <div style="padding-left: 15px;">
+                    <h5>{{ user.username }}</h5>
+                </div>
+                <li>
+                    <a href="{% url 'autenticacion_password_change' %}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-key fa-stack-1x "></i></span>Cambiar contraseña</a>
+                </li>
+                <li>
+                    <a href="{% url 'autenticacion_logout' %}"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Cerrar sesión</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    {% block content %}{% endblock %}
 
     {% block footer %}{% endblock %}
 
