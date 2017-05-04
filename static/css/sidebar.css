@@ -72,6 +72,14 @@
     padding-left: 15px;
 }
 
+.sidebar-nav .logo {
+padding: 8px 8px 8px 15px; font-size: 20px;
+}
+
+.sidebar-nav .logo a img {
+margin-right: 4px;
+}
+
 .sidebar-nav div a {
     color: #FFFFFF;
 }

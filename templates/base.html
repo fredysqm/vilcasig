@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css" charset="utf-8">
         <link rel="stylesheet" href="/static/css/font-awesome.css" type="text/css" charset="utf-8">
         <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="/static/css/base.css" type="text/css" charset="utf-8">
     {% endcompress %}
     {% compress css %}
         {% block css %}{% endblock %}
@@ -22,9 +23,9 @@
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-                <div style="padding: 8px 8px 8px 15px; font-size: 20px;" >
+                <div class="logo">
                     <a href="{% url 'sig_data_main' %}">
-                        <img style="margin-right: 6px;" src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
+                        <img src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
                     </a>
                 </div>
                 {% block menu %}{% endblock %}
