@@ -1,0 +1,24 @@
+{% if user.is_authenticated %}
+    <div>
+        <h6>CONTENIDO</h6>
+    </div>
+    <li class="active">
+        <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-key fa-stack-1x "></i></span>Item1</a>
+    </li>
+    <li>
+        <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Item2</a>
+    </li>
+    <li>
+        <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Item3</a>
+    </li>
+
+    <div>
+        <h6>{{ user.username }}</h6>
+    </div>
+    <li class="{% if active_tab == 'autenticacion_password_change' %} active{% endif %}">
+        <a href="{% url 'autenticacion_password_change' %}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-key fa-stack-1x "></i></span>Cambiar contraseña</a>
+    </li>
+    <li>
+        <a href="{% url 'autenticacion_logout' %}"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Cerrar sesión</a>
+    </li>
+{% endif %}

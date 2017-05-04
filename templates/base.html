@@ -22,35 +22,12 @@
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-                <div style="padding: 8px 8px 8px 15px; font-size: 20px; background: #2c3e50;" >
+                <div style="padding: 8px 8px 8px 15px; font-size: 20px;" >
                     <a href="{% url 'sig_data_main' %}">
                         <img style="margin-right: 6px;" src="{% static 'img/logo.png' %}" /><strong>SIG Vilcabamba</strong>
                     </a>
                 </div>
-                {% if user.is_authenticated %}
-                <div style="padding-left: 15px;">
-                    <h5>CONTENIDO</h5>
-                </div>
-                <li>
-                    <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-key fa-stack-1x "></i></span>Item1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Item2</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Item3</a>
-                </li>
-
-                <div style="padding-left: 15px;">
-                    <h5>{{ user.username }}</h5>
-                </div>
-                <li>
-                    <a href="{% url 'autenticacion_password_change' %}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-key fa-stack-1x "></i></span>Cambiar contraseña</a>
-                </li>
-                <li>
-                    <a href="{% url 'autenticacion_logout' %}"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Cerrar sesión</a>
-                </li>
-                {% endif %}
+                {% block menu %}{% endblock %}
             </ul>
         </div>
 
