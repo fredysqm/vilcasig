@@ -1,51 +1,302 @@
-{% extends 'sig/client/base.html' %}{% load staticfiles %}
+{% extends 'base.html' %}{% load staticfiles %}
 
 {% block title %}SIG Vilcabamba{% endblock %}
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'libs/ext/resources/css/ext-all-notheme.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'libs/ext/resources/css/xtheme-blue.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'libs/ext/ux/css/ux-all.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/TriStateTreeAndCheckbox.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/ThemeSwitcherDataView.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/layerOrderTab.css' %}" />
-
-<style type="text/css">
-    #dpiDetection {
-        height: 1in;
-        left: -100%;
-        position: absolute;
-        top: -100%;
-        width: 1in;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-    <div id="dpiDetection"></div>
-<!--     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCfekdyTCwX8OHMzxKndFWLG2rUMqQvNTo"></script> -->
+<a  class="navbar-brand" href="{% url 'sig_client_main' %}">
+    <img id="logo" src="{% static 'img/logo.png' %}" />
+</a>
+<div id="map"> </div>
+<div id="mouse-position"></div>
 {% endblock %}
 
 {% block js %}
-    <script type="text/javascript" src="{% static 'libs/ext/adapter/ext/ext-base-debug.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/ext/ext-all-debug-w-comments.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/ext/ux/ux-all.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/proj4js/proj4js-compressed.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/openlayers/OpenLayers.js' %}"></script>
-    <script type="text/javascript" src="{% static 'libs/geoext/script/GeoExt.js' %}"></script>
+<script type="text/javascript">
 
-    <script type="text/javascript" src="{% static 'js/Translations.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/GlobalOptions.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/Customizations.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/GISProjectListing.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/GetUrlParams.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/TriStateTree.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/GUI.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/QGISExtensions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/GeoNamesSearchCombo.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/FeatureInfoDisplay.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/LegendAndMetadataDisplay.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/WebgisInit.js' %}"></script>
+      var mousePositionControl = new ol.control.MousePosition({
+        coordinateFormat: ol.coordinate.createStringXY(4),
+        projection: 'EPSG:32718',
+        // comment the following two lines to have the mouse position
+        // be placed within the map.
+        className: 'custom-mouse-position',
+        target: document.getElementById('mouse-position'),
+        undefinedHTML: '&nbsp;'
+      });
+
+    var strWMSVilca = 'http://localhost/sigserver/qgis_mapserv.fcgi';
+
+    var styl_sig_centropoblado_punto = function(feature) {
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                fill: new ol.style.Fill({ color: [255,0,0,0.6] }),
+                stroke: new ol.style.Stroke({ color: [0,0,0,1] }),
+                radius: 5
+            }),
+            text: new ol.style.Text({
+                textAlign: 'left',
+                //textBaseline: baseline,
+                font: 'normal 9px Trebuchet MS',
+                text: feature.get('CP_NOMBRE'),
+                fill: new ol.style.Fill({ color: [0,0,0,1] }),
+                stroke: new ol.style.Stroke({ color: [255,255,255,1], width: 3 }),
+                offsetX: 8,
+                //offsetY: offsetY,
+                //rotation: rotation
+            })
+        })
+    };
+
+
+    var sig_layers = [
+
+        new ol.layer.Group({
+            'title': 'Mapas base:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Sat Vilcabamba',
+                    type: 'base',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'satelite', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+        new ol.layer.Group({
+            title: 'Topografí­a:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Curvas Nivel 25m',
+                    name: 'sig_topografia_curvas25m',
+                    description: 'sig_topografia_curvas25m',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'CURVAS_NIVEL_25m', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Cerros',
+                    name: 'sig_topografia_cerros',
+                    description: 'sig_topografia_cerros',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'CERROS', 'TILED': true }
+                    }),
+                }),
+
+                    new ol.layer.Tile({
+                    title: 'Cotas',
+                    name: 'sig_topografia_cotas',
+                    description: 'sig_topografia_cotas',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'COTAS', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+
+        new ol.layer.Group({
+            title: 'Uso de Suelos:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Uso de Suelos',
+                    name: 'sig_usosuelos_main',
+                    description: 'sig_usosuelos_main',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'USO_ACTUAL_SUELOS', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+
+        new ol.layer.Group({
+            title: 'Geologí­a:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Geología',
+                    name: 'sig_geologia_main',
+                    description: 'sig_geologia_main',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'GEOLOGICO', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+        new ol.layer.Group({
+            title: 'Vias:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Red Vial',
+                    name: 'sig_vias_redsig_vias_red',
+                    description: 'sig_hidrologia_rios',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'RED_VIAL_VILCABAMBA', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+        new ol.layer.Group({
+            title: 'Hidrologí­a:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Rios',
+                    name: 'sig_hidrologia_rios',
+                    description: 'sig_hidrologia_rios',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'RIO_LINEA', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+
+        new ol.layer.Group({
+            title: 'Centros Poblados:',
+            layers: [
+
+                new ol.layer.Vector({
+                    title: 'Perimetros',
+                    name: 'sig_centropoblado_perimetro',
+                    description: 'sig_centropoblado_perimetro',
+                    visible: true,
+                    //minResolution: 0.001,
+                    maxResolution: 20,
+                    source: new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: 'http://localhost/sigserver/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=perimetro&outputFormat=GeoJSON&srsname=EPSG:32718'
+                    }),
+                }),
+
+                new ol.layer.Vector({
+                    title: 'Puntos',
+                    name: 'sig_centropoblado_punto',
+                    description: 'sig_centropoblado_punto',
+                    visible: true,
+                    //minResolution: 0.1,
+                    maxResolution: 100,
+                    source: new ol.source.Vector({
+                        format: new ol.format.GeoJSON(),
+                        url: 'http://localhost/sigserver/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=centropoblado&outputFormat=GeoJSON&srsname=EPSG:32718'
+                    }),
+                    style: styl_sig_centropoblado_punto,
+                }),
+
+            ]
+        }),
+
+        new ol.layer.Group({
+            title: 'Limites INEI:',
+            layers: [
+
+                new ol.layer.Tile({
+                    title: 'Distrito',
+                    name: 'sig_limite_distrito',
+                    description: 'sig_limite_distrito',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'distrito', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Provincia',
+                    name: 'sig_limite_provincia',
+                    description: 'sig_limite_provincia',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'provincia', 'TILED': true }
+                    }),
+                }),
+
+                new ol.layer.Tile({
+                    title: 'Departamento',
+                    name: 'sig_limite_departamento',
+                    description: 'sig_limite_departamento',
+                    visible: true,
+                    source: new ol.source.TileWMS({
+                        url: strWMSVilca,
+                        params: { 'LAYERS': 'departamento', 'TILED': true }
+                    }),
+                }),
+
+            ]
+        }),
+
+    ];
+
+
+    var projection = new ol.proj.Projection({
+      code: 'EPSG:32718',
+      units: 'm'
+    });
+
+    var map = new ol.Map({
+        target: 'map',
+
+        controls: ol.control.defaults({
+            attributionOptions: ({
+                collapsible: true
+            })
+        }).extend([
+            new ol.control.ScaleLine()
+        ]).extend([
+            new ol.control.OverviewMap({
+                collapsed: false,
+            })
+        ]).extend([
+            new ol.control.FullScreen()
+        ]).extend([mousePositionControl]),
+
+        layers: sig_layers,
+
+        view: new ol.View({
+            //projection: projection,
+            center: [706704.6, 8553299.7],
+            zoom: 12,
+        })
+    });
+
+    map.addControl(new ol.control.ZoomSlider());
+
+    var layerSwitcher = new ol.control.LayerSwitcher({
+        tipLabel: 'Leyenda'
+    });
+
+    map.addControl(layerSwitcher);
+    layerSwitcher.showPanel();
+</script>
 {% endblock %}
