@@ -162,7 +162,7 @@ layerTreeTitleString["es"] = "Capas";
 //title of background layers
 var backgroundLayerTitleString = new Array();
 backgroundLayerTitleString["en"] = "Background Layers";
-backgroundLayerTitleString["es"] = "Background Layers";
+backgroundLayerTitleString["es"] = "Capas base";
 
 //title of layer order panel
 var layerOrderPanelTitleString = new Array();
@@ -227,7 +227,7 @@ abstractString["es"] = "Resumen:";
 //title of legend and per layer metadata window
 var layerQueryable = new Array();
 layerQueryable["en"] = "This layer is queryable: ";
-layerQueryable["es"] = "Esta capa se puede consultar: "; 
+layerQueryable["es"] = "Esta capa se puede consultar: ";
 
 //in case we need a yes
 var yesString = new Array();
@@ -361,7 +361,7 @@ searchErrorString["es"] = "Error en la búsqueda";
 
 //search no records found
 var searchNoRecordsFoundString = new Array();
-searchNoRecordsFoundString["en"] = "No records found"; 
+searchNoRecordsFoundString["en"] = "No records found";
 searchNoRecordsFoundString["es"] = "Error en la búsqueda";
 
 //print settings toolbar title
@@ -423,7 +423,7 @@ exportButtonTextString["es"] = "Exportar";
 //export raster file properties text (window title)
 var exportFilePropertyTextString = new Array();
 exportFilePropertyTextString["en"] = "Rasterfile properties: ";
-exportFilePropertyTextString["es"] = "Propiedades del raster: "; 
+exportFilePropertyTextString["es"] = "Propiedades del raster: ";
 
 //export raster file copy/save hint (window title)
 var exportSaveCopyHintText = new Array();
@@ -468,7 +468,7 @@ DXFExportCurrentAreaLabel["es"] = "Área actual: ";
 //no limit for the DXF export label
 var DXFExportNoAreaLimitLabel = new Array();
 DXFExportNoAreaLimitLabel["en"] = "no limit";
-DXFExportNoAreaLimitLabel["es"] = "sin límite"; 
+DXFExportNoAreaLimitLabel["es"] = "sin límite";
 
 //objectIdentificationModeStrings
 var objectIdentificationModeString = new Array();

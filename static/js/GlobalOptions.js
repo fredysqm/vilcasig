@@ -86,7 +86,7 @@ var enableGoogleCommercialMaps = false;
 
 var enableOSMMaps = false;
 
-var enableBGMaps = false;
+var enableBGMaps = true;
 if (enableBingCommercialMaps || enableOSMMaps || enableGoogleCommercialMaps) {
     enableBGMaps = true;
 }
@@ -202,7 +202,7 @@ var mapSearchPanelConfigs = {
 mapSearchPanelConfigs[project_map] = [simpleWmsSearch, urlRewriteSearch];
 
 //templates to define tooltips for a layer, to be shown on hover identify. The layer fields must be wrapped inside <%%> special tags.
-//if a layers field is found with the name "tooltip" its content will have precedence over this configuration 
+//if a layers field is found with the name "tooltip" its content will have precedence over this configuration
 var tooltipTemplates = {
 	'Country':{
 		template: "Look for the country on Google Search: <a href='http://www.google.it/#output=search&q=<%name%>' target='_blank'><%name%></a>"
@@ -306,7 +306,7 @@ var overviewLayer = null;
 overviewLayer = new OpenLayers.Layer.OSM();
 
 // prevent the user from choosing a print resolution
-// if fixedPrintResolution = null, the user is allowed to choose the print resolution. 
+// if fixedPrintResolution = null, the user is allowed to choose the print resolution.
 var fixedPrintResolution = null; // for a fixed resolution of 200dpi fill 200
 
 //print options - scales and dpi
