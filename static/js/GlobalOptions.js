@@ -71,7 +71,7 @@ var project_map = Ext.urlDecode(window.location.search.substring(1)).map;
 var enableDXFExport = false;
 
 // show the permalink button
-var enablePermalink = false;
+var enablePermalink = true;
 //use a URL shortener for your permalink function
 var permaLinkURLShortener = null; // "/wsgi/createShortPermalink.wsgi";
 
@@ -259,7 +259,7 @@ var authid = "EPSG:"+32718;
 var qgisLayerTransparency = true;
 
 //number of zoomlevels, uses main map layer and all base layers
-var ZOOM_LEVELS = 32;
+var ZOOM_LEVELS = 28;
 
 // OpenLayers global options
 // see http://dev.openlayers.org/releases/OpenLayers-2.10/doc/apidocs/files/OpenLayers/Map-js.html
@@ -271,6 +271,7 @@ var MapOptions = {
   numZoomLevels:ZOOM_LEVELS,
   fractionalZoom: !enableWmtsBaseLayers && !enableBGMaps,
   transitionEffect:"resize",
+  tileSize: new OpenLayers.Size(256,256),
   controls: []
 };
 
