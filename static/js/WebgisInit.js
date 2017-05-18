@@ -838,7 +838,7 @@ function postLoading() {
             mapThemeSwitcher = new ThemeSwitcher(Ext.getCmp('MapPanel'));
         } else {
             // hide map theme button
-            Ext.getCmp('mapThemeButton').hide();
+            //Ext.getCmp('mapThemeButton').hide();
         }
 
         myTopToolbar.doLayout();
@@ -989,8 +989,8 @@ function postLoading() {
         } else {
             // hide search panel
             var searchPanel = Ext.getCmp('SearchPanel');
-            searchPanel.removeAll();
-            searchPanel.hide();
+            //searchPanel.removeAll();
+            //searchPanel.hide();
         }
 
         //update layout of left panel and adds a listener to automatically adjust layout after resizing

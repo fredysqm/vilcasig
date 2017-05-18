@@ -81,16 +81,6 @@ MyViewportUi = Ext.extend(Ext.Viewport, {
                 collapseMode: 'standard',
                 id: 'LeftPanel',
                 items: [{
-                    xtype: 'button',
-                    height: '1.5em',
-                    width: '100%',
-                    text: mapThemeButtonTitleString[lang],
-                    id: 'mapThemeButton',
-                    tooltip: mapThemeButtonTooltipString[lang],
-                    enableToggle: false,
-                    allowDepress: false,
-                    flex: 0.1
-                }, {
                     xtype: 'panel',
                     layout: 'accordion',
                     border: false,
@@ -105,17 +95,6 @@ MyViewportUi = Ext.extend(Ext.Viewport, {
                     },
                     activeItem: 1,
                     items: [{
-                        xtype: 'panel',
-                        title: searchPanelTitleString[lang],
-                        id: 'SearchPanel',
-                        items: [{
-                            xtype: 'tabpanel',
-                            enableTabScroll: true,
-                            activeTab: 0,
-                            id: 'SearchTabPanel',
-                            items: []
-                        }]
-                    }, {
                         xtype: 'panel',
                         title: mapPanelTitleString[lang],
                         layout: 'border',
