@@ -102,22 +102,6 @@ Ext.onReady(function () {
     //set some status messsages
     mainStatusText.setText(mapAppLoadingString[lang]);
 
-    //OpenstreetMap background layers
-    if (enableOSMMaps) {
-        OpenStreetMap= new OpenLayers.Layer.OSM("OpenStreetMap");
-        baseLayers.push(OpenStreetMap);
-    }
-
-
-    var bg_vilca_esri = new OpenLayers.Layer.WMS(
-            "Vilcabamba SAT",
-            "http://localhost/sigserver/qgis_mapserv.fcgi",
-            { layers: "satelite," }
-        );
-     baseLayers.push(bg_vilca_esri);
-
-
-
     if (urlParamsOK) {
         loadWMSConfig(null);
     } else {

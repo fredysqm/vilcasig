@@ -71,28 +71,13 @@ var project_map = Ext.urlDecode(window.location.search.substring(1)).map;
 var enableDXFExport = false;
 
 // show the permalink button
-var enablePermalink = true;
+var enablePermalink = false;
 //use a URL shortener for your permalink function
 var permaLinkURLShortener = null; // "/wsgi/createShortPermalink.wsgi";
 
-// enable to use commercial Google and Bing layers (also add BingApiKey)
-var enableBingCommercialMaps = false;
-
-if (enableBingCommercialMaps) {
-    var bingApiKey = "Ah50MLZcGai9LY5lUAqrOLAMWNDLdp4xjdkNLJYACHuQtqvQ7osDRytwJXnkJDH3"; // http://msdn.microsoft.com/en-us/library/ff428642.aspx
-}
-
-var enableGoogleCommercialMaps = false;
-
-var enableOSMMaps = false;
-
 var enableBGMaps = true;
-if (enableBingCommercialMaps || enableOSMMaps || enableGoogleCommercialMaps) {
-    enableBGMaps = true;
-}
-if (enableBGMaps) {
-    var initialBGMap = 0;
-}
+
+var initialBGMap = 0;
 
 // enable to use WMTS base layers
 var enableWmtsBaseLayers = false;

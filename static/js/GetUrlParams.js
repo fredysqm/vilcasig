@@ -7,7 +7,7 @@
  * https://github.com/qgis/qgis-web-client/blob/master/README
  * for the full text of the license and the list of contributors.
  *
-*/ 
+*/
 
 //we need to call this part of the script before initializing the GUI
 //because some settings, like the language choice, influence the GUI
@@ -38,10 +38,12 @@ else {
         //older IEs do not know document.documentURI
         urlString = window.location.href;
     }
+
     // replace spaces encoded as '+'
     urlString = urlString.replace(/\+/g, ' ');
     var urlArray = urlString.split('?');
     //substr did not work on ie - patch from Noda
+
     var norewrite;
     if (serverAndCGI.substr(serverAndCGI.length - 3, 3).toLowerCase() === "cgi") {
         norewrite = true;
@@ -86,7 +88,7 @@ else {
         if (enableBGMaps && (urlParams.visibleBackgroundLayer != null)) {
             visibleBackgroundLayer = urlParams.visibleBackgroundLayer;
         }
-        
+
         if (urlParams.initialLayerOrder != null) {
             if (urlParams.initialLayerOrder != "") {
                 initialLayerOrder = urlParams.initialLayerOrder.split(",");
@@ -113,7 +115,7 @@ else {
                 lang = urlParams.lang;
                 var xhr = new XMLHttpRequest();
                 xhr.open('HEAD', "help_"+urlParams.lang+".html", false);
-                xhr.send();            
+                xhr.send();
                 if (xhr.status!="404"){
                     helpfile="help_"+urlParams.lang+".html";
                 }

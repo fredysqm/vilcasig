@@ -28,27 +28,13 @@ function customInit() {
 
 // called before map initialization
 function customBeforeMapInit() {
-//  Example how to use a WMS layer as background layer:
-//  create an OpenLayers.Layer.WMS object, see OpenLayers documentation for details
-//  var myBackgroundLayer = new OpenLayers.Layer.WMS("myName",
-//      "myURL", {
-//          layers: "myLayer",
-//          format: format,
-//          dpi: screenDpi,
-//          VERSION: "1.3.0"
-//      },
-//      {
-//          buffer:0,
-//          singleTile:true,
-//          ratio:1,
-//          transitionEffect:"resize",
-//          isBaseLayer: true,
-//          projection:authid
-//      }
-//  );
-//
-//  add the layer to the array of background layers
-//  baseLayers.push(myBackgroundLayer); 
+
+    var bg_vilca_esri = new OpenLayers.Layer.WMS(
+            "Vilcabamba SAT",
+            "http://localhost/sigserver/qgis_mapserv.fcgi",
+            { layers: "satelite," }
+        );
+    baseLayers.push(bg_vilca_esri);
 }
 
 // called after map initialization
@@ -64,12 +50,13 @@ function customAfterMapInit() {
 //             alert ( "You clicked on " + x + ", " + y );
 //         }
 //     });
-// 
+//
 //     geoExtMap.map.addControl(openlayersClickEvent);
 }
 
 // called at the end of GetMapUrls
 function customAfterGetMapUrls() {
+    //alert("hola");
 }
 
 // called when DOM is ready (Ext.onReady in WebgisInit.js)
@@ -88,8 +75,8 @@ function customAfterPrint() {
 }
 
 // new buttons for the toolbar
-var customButtons = [ 
-   
+var customButtons = [
+
 //    // Add a separator and a button
 //    {
 //      xtype: 'tbseparator'
