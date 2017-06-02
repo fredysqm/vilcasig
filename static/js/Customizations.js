@@ -31,7 +31,7 @@ function customBeforeMapInit() {
 
     var bg_vilca_esri = new OpenLayers.Layer.WMS(
             "Vilcabamba SAT",
-            "http://localhost/sigserver/qgis_mapserv.fcgi",
+            "http://sig.mdv.net/sigserver/qgis_mapserv.fcgi",
             { layers: "satelite," }
         );
     baseLayers.push(bg_vilca_esri);
