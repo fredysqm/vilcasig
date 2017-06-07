@@ -24,7 +24,7 @@
         undefinedHTML: '&nbsp;'
       });
 
-    var strWMSVilca = 'http://localhost/sigserver/qgis_mapserv.fcgi';
+    var strWMSVilca = 'http://sig.mdv.net/sigserver/qgis_mapserv.fcgi';
 
     var styl_sig_centropoblado_punto = function(feature) {
         return new ol.style.Style({
@@ -195,7 +195,7 @@
                     maxResolution: 20,
                     source: new ol.source.Vector({
                         format: new ol.format.GeoJSON(),
-                        url: 'http://localhost/sigserver/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=perimetro&outputFormat=GeoJSON&srsname=EPSG:32718'
+                        url: 'http://sig.mdv.net/sigserver/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=perimetro&outputFormat=GeoJSON&srsname=EPSG:32718'
                     }),
                 }),
 
@@ -208,7 +208,7 @@
                     maxResolution: 100,
                     source: new ol.source.Vector({
                         format: new ol.format.GeoJSON(),
-                        url: 'http://localhost/sigserver/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=centropoblado&outputFormat=GeoJSON&srsname=EPSG:32718'
+                        url: 'http://sig.mdv.net/sigserver/qgis_mapserv.fcgi?SERVICE=WFS&version=1.1.0&request=GetFeature&typename=centropoblado&outputFormat=GeoJSON&srsname=EPSG:32718'
                     }),
                     style: styl_sig_centropoblado_punto,
                 }),
@@ -284,7 +284,7 @@
         layers: sig_layers,
 
         view: new ol.View({
-            //projection: projection,
+            projection: projection,
             center: [706704.6, 8553299.7],
             zoom: 12,
         })
