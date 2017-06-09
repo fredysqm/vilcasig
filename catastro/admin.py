@@ -20,7 +20,7 @@ class SectorAdmin(admin.ModelAdmin):
     )
 
 class ManzanaAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'sector', '_creado', '_modificado')
+    list_display = ('codigo', 'letra', 'sector', '_creado', '_modificado')
     search_fields = ('sector__nombre',)
     ordering = ('codigo', )
     list_per_page = 50
@@ -29,7 +29,7 @@ class ManzanaAdmin(admin.ModelAdmin):
     }
     fieldsets = (
         (None, {
-            'fields': ('sector', 'codigo', 'geom')
+            'fields': ('sector', 'codigo', 'letra', 'geom')
         }),
     )
 

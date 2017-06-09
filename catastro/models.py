@@ -75,6 +75,12 @@ class Manzana(models.Model):
                 ]
             )
 
+    letra = models.CharField(
+                max_length=3,
+                verbose_name='Letra',
+                help_text='Letra de la manzana',
+            )
+
     geom = models.PolygonField(
                 srid=32718,
                 verbose_name='Geometría',
@@ -90,6 +96,7 @@ class Manzana(models.Model):
 
     def save(self):
         self._centroid = self.geom.centroid
+        self.letra = self.letra.upper()
         super(Manzana, self).save()
 
     class Meta:

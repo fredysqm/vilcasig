@@ -71,7 +71,7 @@ class CentroPobladoAdmin(admin.ModelAdmin):
         }),
     )
     formfield_overrides = {
-        models.PolygonField: {'widget': Textarea }
+        models.PointField: {'widget': Textarea }
     }
 
 
