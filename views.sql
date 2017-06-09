@@ -30,21 +30,21 @@ CREATE OR REPLACE VIEW sig_limite_distrito AS (
 );
 
 
-CREATE OR REPLACE VIEW sig_centropoblado_punto AS (
-	SELECT	cp.id AS CODIGO,
-			cp.nombre AS CP_NOMBRE,
-			cp.distrito_id AS DIST_UBIGEO,
-			cp._centroid AS GEOM
-	FROM ubigeo_centropoblado cp
-);
-
-
-CREATE OR REPLACE VIEW sig_centropoblado_perimetro AS (
+CREATE OR REPLACE VIEW sig_limite_centropoblado AS (
 	SELECT	cp.id AS CODIGO,
 			cp.nombre AS CP_NOMBRE,
 			cp.distrito_id AS DIST_UBIGEO,
 			cp.geom AS GEOM
 	FROM ubigeo_centropoblado cp
+);
+
+
+CREATE OR REPLACE VIEW sig_catastro_sector AS (
+	SELECT	sec.id AS CODIGO,
+			sec.nombre AS SEC_NOMBRE,
+			sec.centro_poblado_id AS CENTROPOBLADO,
+			sec.geom AS GEOM
+	FROM catastro_sector sec
 );
 
 
