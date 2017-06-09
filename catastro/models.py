@@ -79,6 +79,12 @@ class Manzana(models.Model):
                 max_length=3,
                 verbose_name='Letra',
                 help_text='Letra de la manzana',
+                validators=[
+                    validators.RegexValidator(
+                        regex='^[A-Za-z0-9]{3}$',
+                        message='Debe ingresar tres dígitos.',
+                    ),
+                ]
             )
 
     geom = models.PolygonField(
@@ -102,3 +108,4 @@ class Manzana(models.Model):
     class Meta:
         ordering = ('codigo',)
         unique_together= (('codigo', 'sector'),)
+        unique_together= (('codigo', 'letra'),)
