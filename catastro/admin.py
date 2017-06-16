@@ -1,7 +1,7 @@
 from django.contrib.gis import admin
 from django.contrib.gis.db import models
 from django.forms.widgets import Textarea
-from catastro.models import Sector, Manzana
+from catastro.models import Sector, Manzana, Lote
 
 
 class SectorAdmin(admin.ModelAdmin):
@@ -33,5 +33,21 @@ class ManzanaAdmin(admin.ModelAdmin):
         }),
     )
 
+
+class LoteAdmin(admin.ModelAdmin):
+    list_display = ('codigo',  'manzana', '_creado', '_modificado')
+    search_fields = ('manzana__nombre',)
+    ordering = ('codigo', )
+    list_per_page = 50
+    formfield_overrides = {
+        models.PolygonField: {'widget': Textarea }
+    }
+    fieldsets = (
+        (None, {
+            'fields': ('manzana', 'codigo', 'geom')
+        }),
+    )
+
 admin.site.register(Sector, SectorAdmin,)
 admin.site.register(Manzana, ManzanaAdmin,)
+admin.site.register(Lote, LoteAdmin,)

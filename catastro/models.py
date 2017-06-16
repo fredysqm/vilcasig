@@ -3,7 +3,6 @@ from django.core import validators
 from ubigeo.models import CentroPoblado
 
 
-
 class Sector(models.Model):
 
     centro_poblado = models.ForeignKey(
@@ -79,12 +78,6 @@ class Manzana(models.Model):
                 max_length=3,
                 verbose_name='Letra',
                 help_text='Letra de la manzana',
-                validators=[
-                    validators.RegexValidator(
-                        regex='^[A-Za-z0-9]{3}$',
-                        message='Debe ingresar tres dígitos.',
-                    ),
-                ]
             )
 
     geom = models.PolygonField(
@@ -98,7 +91,7 @@ class Manzana(models.Model):
     _modificado = models.DateTimeField(auto_now=True,)
 
     def __str__(self):
-        return 'MANZANA: %s, SECTOR: %s' % (self.codigo, self.sector)
+        return 'SECTOR: %s, MANZANA: %s' % (self.sector, self.codigo)
 
     def save(self):
         self._centroid = self.geom.centroid
@@ -107,5 +100,46 @@ class Manzana(models.Model):
 
     class Meta:
         ordering = ('codigo',)
-        unique_together= (('codigo', 'sector'),)
-        unique_together= (('codigo', 'letra'),)
+        unique_together= (('sector', 'codigo'), ('sector', 'letra'))
+
+
+class Lote(models.Model):
+
+    manzana = models.ForeignKey(
+                Manzana,
+                verbose_name='Mazana',
+                help_text='Manzana a la que pertenece el lote',
+            )
+
+    codigo = models.CharField(
+                max_length=3,
+                verbose_name='Código',
+                help_text='Código del lote',
+                validators=[
+                    validators.RegexValidator(
+                        regex='^[0-9]{3}$',
+                        message='Debe ingresar tres dígitos.',
+                    ),
+                ]
+            )
+
+    geom = models.PolygonField(
+                srid=32718,
+                verbose_name='Geometría',
+                help_text='Geometría asociada al lote, (WKT, EPSG:32718)',
+            )
+
+    _centroid = models.PointField(srid=32718,)
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def __str__(self):
+        return 'MANZANA: %s, LOTE: %s' % (self.manzana, self.codigo)
+
+    def save(self):
+        self._centroid = self.geom.centroid
+        super(Lote, self).save()
+
+    class Meta:
+        ordering = ('codigo',)
+        unique_together= (('manzana', 'codigo'),)

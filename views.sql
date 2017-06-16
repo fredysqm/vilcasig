@@ -47,4 +47,19 @@ CREATE OR REPLACE VIEW sig_catastro_sector AS (
 	FROM catastro_sector sec
 );
 
+CREATE OR REPLACE VIEW sig_catastro_manzana AS (
+	SELECT	mzn.id AS ID,
+			mzn.codigo AS CODIGO,
+            mzn.letra  AS LETRA,
+			mzn.sector_id AS SECTOR,
+			mzn.geom AS GEOM
+	FROM catastro_manzana mzn
+);
 
+CREATE OR REPLACE VIEW sig_catastro_lote AS (
+	SELECT	lte.id AS ID,
+			lte.codigo AS CODIGO,
+			lte.manzana_id AS MANZANA,
+			lte.geom AS GEOM
+	FROM catastro_lote lte
+);
