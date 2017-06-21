@@ -77,20 +77,28 @@ function customAfterPrint() {
 // new buttons for the toolbar
 var customButtons = [
 
-//    // Add a separator and a button
-//    {
-//      xtype: 'tbseparator'
-//    }, {
-//      xtype: 'button',
-//      enableToggle: true,
-//      allowDepress: true,
-//      toggleGroup: 'mapTools',
-//      scale: 'medium',
-//      icon: 'gis_icons/test.gif',
-//      tooltipType: 'qtip',
-//      tooltip: "Test button - click on the map",
-//      id: 'TESTBUTTON'
-//    }
+    '->', {
+        xtype: 'label',
+        text: SIG_USERNAME,
+    }, {
+        xtype: 'tbseparator'
+    },
+    {
+        xtype: 'button',
+        enableToggle: false,
+        allowDepress: false,
+        scale: 'medium',
+        icon: '/static/img/gis_icons/logout.png',
+        tooltipType: 'qtip',
+        tooltip: "¡Cerrar sesión!",
+        id: 'AUTHLOGOUT',
+        listeners: {
+            'click': function () {
+            window.location = SIG_AUTH_LOGOUT_URL;
+            }
+        }
+    }
+
 ];
 
 // code to add buttons in the toolbar

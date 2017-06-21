@@ -24,6 +24,11 @@
 
 {% block content %}
     <div id="dpiDetection"></div>
+
+    <script type="text/javascript">
+        var SIG_USERNAME = "{{ user.get_username }}";
+        var SIG_AUTH_LOGOUT_URL = "{% url 'autenticacion_logout' %}";
+    </script>
 {% endblock %}
 
 {% block js %}
